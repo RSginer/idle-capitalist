@@ -1,0 +1,35 @@
+{
+  "name": "idle-capitalist-server",
+  "version": "1.0.0",
+  "description": "Backend for the game",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "DEBUG=idle-capitalist-server:* nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RSginer/idle-capitalist.git"
+  },
+  "keywords": [
+    "javascript",
+    "videogame",
+    "idle",
+    "capitalist"
+  ],
+  "author": "RSginer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RSginer/idle-capitalist/issues"
+  },
+  "homepage": "https://github.com/RSginer/idle-capitalist#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "uuid": "^3.4.0",
+    "ws": "^7.2.1"
+  }
+}
