@@ -6,9 +6,12 @@ const express = require('express');
 const http = require('http');
 const uuid = require('uuid');
 const WebSocket = require('ws');
+const cors = require('cors');
 
 const app = express();
 const map = new Map();
+
+app.use(cors());
 
 //
 // We need the same instance of the session parser in express and
@@ -30,7 +33,7 @@ app.post('/login', function(req, res) {
 
   debug(`Updating session for user ${id}`);
   req.session.userId = id;
-  res.send({ result: 'OK', message: 'Session updated' });
+  res.send({ userId: req.session.userId });
 });
 
 app.delete('/logout', function(request, response) {
