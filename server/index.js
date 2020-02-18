@@ -9,6 +9,8 @@ const WebSocket = require('ws');
 const cors = require('cors');
 
 const app = express();
+
+// Map to store websockets for each user
 const map = new Map();
 
 app.use(cors());
