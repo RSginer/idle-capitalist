@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-export class GameStarted extends Component {
+import { Cash } from '../components/cash';
+
+import "./index.css";
+
+export class Game extends Component {
 
   render() {
     return (
-      <section>
-
-            <b>USER_ID: {this.props.userId}</b>
-
-      </section>
+    <div>
+      <div className="userId">USER_ID: {this.props.userId}</div>
+      <Cash amount={1000000} />
+    </div>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {
   return {
-
+    userId: state.player.userId
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-
-  }
+  return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameStarted);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
 

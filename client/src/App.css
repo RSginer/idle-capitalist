@@ -1,0 +1,7 @@
+.App {
+  position: relative;
+  width: 720px;
+  height: 100vh;
+  background: #CCC;
+  padding: 15px;
+}

@@ -1,0 +1,8 @@
+.userId {
+  font-size: 0.5em;
+  font-weight: bold;
+  position: absolute;
+  top: 2px;
+  left: 15px;
+  color: #222;
+}

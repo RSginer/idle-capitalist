@@ -1,0 +1,21 @@
+.cash-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  background-color: blue;
+  padding-top: 3px;
+  padding-left: 3px;
+  border-radius: 4px;
+}
+
+.cash-container .user-picture img {
+  border-radius: 100%;
+}
+
+.cash-container .cash-amount {
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  color: yellow;
+  margin-left: 15px;
+}
