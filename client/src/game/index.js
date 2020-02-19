@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { initGame } from '../actions';
+import { GameStarted } from './container';
+import { GameLoading } from './components/loading';
+import { GameError } from './components/error';
+
 
 export class Game extends Component {
 
@@ -13,13 +17,10 @@ export class Game extends Component {
     return (
       <section>
         {
-          !this.props.loading && !this.props.error && <div>
-            <b>USER_ID: {this.props.userId}</b>
-        </div>
+          !this.props.loading && !this.props.error && <GameStarted userId={this.props.userId}/>
         }
-        { this.props.loading && <div> Loading... </div> }
-        { !this.props.loading && this.props.error && <div> {JSON.stringify(this.props.error)} </div> }
-
+        { this.props.loading && <GameLoading/> }
+        { !this.props.loading && this.props.error && <GameError message={JSON.stringify(this.props.error)}/>}
       </section>
     )
   }
