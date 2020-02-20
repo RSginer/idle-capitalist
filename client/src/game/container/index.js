@@ -15,7 +15,12 @@ export class Game extends Component {
         <Cash amount={this.props.cashAmount} />
         <div className="game-businesses-container">
           <div className="game-businesses-list">
-            {Object.keys(config.businesses).map((businessKey) => <Business key={businessKey} title={config.businesses[businessKey].title} type={businessKey} />)}
+            {Object.keys(config.businesses).map((businessKey) => <Business
+               key={businessKey} 
+               title={config.businesses[businessKey].title} 
+               type={businessKey} 
+               managersBasePrice={config.businesses[businessKey].managersBasePrice}
+               />)}
           </div>
         </div>
 

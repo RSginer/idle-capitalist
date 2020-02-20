@@ -42,17 +42,27 @@
 
 .business-managers {
   display: flex;
-  width: 230px;
+  width: 270px;
   justify-content: space-around;
 }
 
 .business-managers-label {
   color: white;
-  font-size: 0.8em;
+  font-size: 0.6em;
 }
 
-.business-managers .business-manager img {
+.business-managers .business-manager .manager-picture {
   border-radius: 100%;
+  border: 2px solid white;
+  margin-right: 5px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75em;
 }
 
 .business-expand {
