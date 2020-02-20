@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Cash } from '../components/cash';
 
 import "./index.css";
+import { Business } from '../components/business';
 
 export class Game extends Component {
 
@@ -12,6 +13,8 @@ export class Game extends Component {
     <div>
       <div className="userId">USER_ID: {this.props.userId}</div>
       <Cash amount={1000000} />
+      <h2 className="businesses-label">Businesses</h2>
+      <Business />
     </div>
     )
   }
