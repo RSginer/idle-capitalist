@@ -7,7 +7,12 @@
   color: #222;
 }
 
-.businesses-label {
+.game-businesses-list {
   color: #555;
+  background: #adadad;
   font-size: 1.2em;
+}
+.game-businesses-container {
+  overflow-y: scroll;
+  padding: 10px;
 }

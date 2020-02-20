@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import config from "../../config";
 import { Cash } from '../components/cash';
+import { Business } from '../components/business';
 
 import "./index.css";
-import { Business } from '../components/business';
 
 export class Game extends Component {
 
+
   render() {
     return (
-    <div>
-      <div className="userId">USER_ID: {this.props.userId}</div>
-      <Cash amount={1000000} />
-      <h2 className="businesses-label">Businesses</h2>
-      <Business />
-    </div>
+      <div>
+        <Cash amount={this.props.cashAmount} />
+        <div className="game-businesses-container">
+          <div className="game-businesses-list">
+            {Object.keys(config.businesses).map((businessKey) => <Business key={businessKey} title={config.businesses[businessKey].title} type={businessKey} />)}
+          </div>
+        </div>
+
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.player.userId
+    userId: state.player.userId,
+    cashAmount: state.player.cashAmount
   }
 }
 

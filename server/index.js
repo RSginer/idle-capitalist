@@ -30,8 +30,9 @@ app.use(sessionParser);
 app.post('/login', function(req, res) {
   //
   // "Log in" user and set userId to session.
-  //
-  const id = uuid.v4();
+  // TODO: implement multiple users and login
+  // const id = uuid.v4();
+  const id = 'rsginer-idle-capitalist';
 
   debug(`Updating session for user ${id}`);
   req.session.userId = id;

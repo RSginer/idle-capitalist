@@ -1,7 +1,8 @@
 import { types } from '../../actions/types';
 
 export default (state = {
-  userId: null,
+  userId: 'rsginer-idle-capitalist',
+  cashAmount: 0
 }, action) => {
   switch (action.type) {
     case types.INIT_GAME_SUCCESS:

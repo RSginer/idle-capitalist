@@ -16,13 +16,14 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <main>
+        <h1>Adventure Capitalist</h1>
+        <div className="container">
           {
             !this.props.loading && !this.props.error && <Game />
           }
           {this.props.loading && <GameLoading />}
           {!this.props.loading && this.props.error && <GameError message={JSON.stringify(this.props.error)} />}
-        </main>
+        </div>
       </div>
     )
   }
