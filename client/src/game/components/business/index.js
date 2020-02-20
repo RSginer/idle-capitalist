@@ -9,8 +9,12 @@ export const Business = (props) => {
   return (
     <div className="business-container">
       <div className="business-level">{props.title} - level 1</div>
-      <div className="business-control" style={{backgroundImage: `url("${config.businesses[props.type].picture}")`}}></div>
-      <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="orange" strokeColor="yellow"  percent={90} />
+      <div className="business-control" style={{backgroundImage: `url("${config.businesses[props.type].picture}")`}}>
+        <div className="business-control-label">
+          <span className="business-control-label-message">Click to manage order</span>
+        </div>
+      </div>
+      <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="gray" strokeColor="yellowgreen"  percent={2} />
       <div className="business-actions">
         <div className="business-managers">
           <p className="business-managers-label">Managers:</p>
