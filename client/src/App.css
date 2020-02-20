@@ -11,6 +11,7 @@
   border-radius: 4px;
   font-size: 20px;
   background-color: #525252;
+  border: 2px solid #222;
 }
 
 .App h1 {
