@@ -9,7 +9,7 @@ export const Cash = (props) => {
         <img src="https://png.pngtree.com/element_our/png_detail/20190103/business-man-line-black-icon-png_309140.jpg" alt="user"/>
       </div>
       <div className="cash-amount">
-        <CurrencyFormat value={2456981} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+        <CurrencyFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} />
       </div>
     </div>
   )

@@ -20,6 +20,7 @@ export class Game extends Component {
                title={config.businesses[businessKey].title} 
                type={businessKey} 
                managersBasePrice={config.businesses[businessKey].managersBasePrice}
+               price={config.businesses[businessKey].price}
                />)}
           </div>
         </div>

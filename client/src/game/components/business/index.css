@@ -4,6 +4,7 @@
   border-radius: 4px;
   border: 2px solid green;
   border-bottom: none;
+  position: relative;
 }
 
 .business-control {
@@ -20,12 +21,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .business-control .business-control-label .business-control-label-message {
   color: white;
-} 
+}
 
 .business-actions {
   margin-top: 2px;
@@ -87,4 +88,29 @@
   font-size: 0.7em;
   color: white;
   font-weight: bold;
+}
+
+.business-without-owner {
+  background: #ccccccdb;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: calc(100% - 2px);
+  justify-content: center;
+  align-items: center;
+}
+.unlock-business {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+}
+.unlock-business-button {
+  font-size: 1em;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: orange;
+  outline: none;
+  color: white;
 }
