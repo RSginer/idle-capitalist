@@ -25,4 +25,4 @@ const initSuccess = res => ({
 const initError = error => ({
   type: types.INIT_GAME_ERROR,
   payload: error
-})
+});
