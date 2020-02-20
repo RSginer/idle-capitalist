@@ -21,6 +21,7 @@ export class Game extends Component {
                type={businessKey} 
                managersBasePrice={config.businesses[businessKey].managersBasePrice}
                price={config.businesses[businessKey].price}
+               owner={this.props.businesses[businessKey].owner}
                />)}
           </div>
         </div>
@@ -33,7 +34,8 @@ export class Game extends Component {
 const mapStateToProps = (state) => {
   return {
     userId: state.player.userId,
-    cashAmount: state.player.cashAmount
+    cashAmount: state.player.cashAmount,
+    businesses: state.businesses
   }
 }
 
