@@ -1,6 +1,5 @@
 import React, { Component, useEffect } from 'react';
 import Game from './game/container';
-import { initGame } from './actions';
 import { GameLoading } from './game/components/loading';
 import { GameError } from './game/components/error';
 import { connect, useState, useSelector, useDispatch } from 'react-redux';
