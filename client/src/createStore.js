@@ -1,14 +1,19 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import createRootReducer from './rootReducer';
-import createSagaMiddleware from 'redux-saga'
+
+import createSagaMiddleware from 'redux-saga';
+import wsMiddleware from './middlewares/websocket';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import initialSaga from "./sagas";
+import websocketConnectionSaga from "./sagas/websocket";
+
 
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = [
   applyMiddleware(
-    sagaMiddleware
+    sagaMiddleware,
+    wsMiddleware
   )
 ]
 
@@ -31,6 +36,8 @@ const store = configureStore();
 
 // SAGAS
 sagaMiddleware.run(initialSaga);
+sagaMiddleware.run(websocketConnectionSaga);
+
 
 export default store;
 
