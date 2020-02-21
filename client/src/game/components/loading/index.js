@@ -5,7 +5,7 @@ import "./index.css";
 export const GameLoading = (props) => {
   return (
     <div className="loading-container">
-    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
     <span className="loading-label">Loading...</span>
     </div>
   )

@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import config from "../../config";
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
 
 import "./index.css";
 
-export class Game extends Component {
+export const Game = () => {
+  const userId = useSelector((state) => state.player.userId);
+  const cashAmount = useSelector((state) => state.player.cashAmount);
+  const businesses = useSelector((state) => state.businesses);
 
-
-  render() {
     return (
       <div>
-        <Cash amount={this.props.cashAmount} />
+        <Cash amount={cashAmount} />
         <div className="game-businesses-container">
           <div className="game-businesses-list">
             {Object.keys(config.businesses).map((businessKey) => <Business
@@ -21,28 +22,13 @@ export class Game extends Component {
                type={businessKey} 
                managersBasePrice={config.businesses[businessKey].managersBasePrice}
                price={config.businesses[businessKey].price}
-               owner={this.props.businesses[businessKey].owner}
+               owner={businesses[businessKey].owner}
                />)}
           </div>
         </div>
-
       </div>
     )
-  }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.player.userId,
-    cashAmount: state.player.cashAmount,
-    businesses: state.businesses
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default Game;
 

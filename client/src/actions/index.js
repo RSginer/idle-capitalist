@@ -4,16 +4,8 @@ import { types } from './types';
 import axios from 'axios';
 
 export const initGame = dispatch => async () => {
-  dispatch({ type: types.INIT_GAME });
+ 
 
-  axios
-    .post(config.serverUrl + '/login', {})
-    .then(res => {
-      dispatch(initSuccess(res.data));
-    })
-    .catch(err => {
-      dispatch(initError(err.message));
-    });
 
 }
 

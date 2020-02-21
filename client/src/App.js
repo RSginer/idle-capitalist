@@ -1,45 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Game from './game/container';
 import { initGame } from './actions';
 import { GameLoading } from './game/components/loading';
 import { GameError } from './game/components/error';
-import { connect } from 'react-redux';
+import { connect, useState, useSelector, useDispatch } from 'react-redux';
+import { types } from "./actions/types";
 
 import './App.css';
 
-export class App extends Component {
+export const App = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.ui.loading);
+  const error = useSelector((state) => state.ui.error);
 
-  componentWillMount() {
-    this.props.initGame();
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <h1>Adventure Capitalist</h1>
-        <div className="container">
-          {
-            !this.props.loading && !this.props.error && <Game />
-          }
-          {this.props.loading && <GameLoading />}
-          {!this.props.loading && this.props.error && <GameError message={JSON.stringify(this.props.error)} />}
-        </div>
+  useEffect(() => {
+    dispatch({ type: types.INIT_GAME });
+  }, []);
+  return (
+    <div className="App">
+      <h1>Adventure Capitalist</h1>
+      <div className="container">
+        {
+          !loading && !error && <Game />
+        }
+        {loading && <GameLoading />}
+        {!loading && error && <GameError message={JSON.stringify(error)} />}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loading: state.ui.loading,
-    error: state.ui.error
-  }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    initGame: initGame(dispatch),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
