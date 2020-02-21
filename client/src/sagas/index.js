@@ -8,7 +8,7 @@ function* initGame() {
     const initRes = yield call(fetchInit);
     yield put({ type: types.INIT_GAME_SUCCESS, payload: initRes });
   } catch (e) {
-    yield put({ type: types.INIT_GAME_ERROR, payload: e });
+    yield put({ type: types.INIT_GAME_ERROR, payload: e.message });
   }
 }
 
