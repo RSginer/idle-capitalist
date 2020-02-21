@@ -1,12 +1,6 @@
 import config from "../config"
+import axios from 'axios';
 
-
-export async function initGame() {
-  return await axios.post(config.serverUrl + '/login', {})
-   /*  .then(res => {
-      dispatch(initSuccess(res.data));
-    })
-    .catch(err => {
-      dispatch(initError(err.message));
-    }); */
+export async function fetchInit() {
+  return await axios.post(config.serverUrl + '/login', {});
 }
