@@ -6,16 +6,17 @@ import config from "../../../config";
 import { Line } from "rc-progress";
 
 export const Business = (props) => {
+
   return (
     <div className="business-container" style={{borderColor: props.owner ? 'green' : 'gray'}}>
       { !props.owner && <div className="business-without-owner">
         <span className="unlock-business">Acquire this business to unlock it</span>
-        <button disabled={props.totalCashAmount < config.businesses[props.businessKey].price} onClick={props.onBuyBusiness(props.businessKey)} className="unlock-business-button">
+        <button disabled={props.totalCashAmount < props.price} onClick={props.onBuyBusiness(props.businessKey)} className="unlock-business-button">
           Buy <CurrencyFormat value={props.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         </button>
       </div>}
       <div className="business-level">{props.title} - level 1</div>
-      <div className="business-control" style={{ backgroundImage: `url("${config.businesses[props.type].picture}")` }}>
+      <div className="business-control" style={{ backgroundImage: `url("${props.picture}")` }}>
         <div className="business-control-label">
           <span className="business-control-label-message">Click to manage order</span>
         </div>

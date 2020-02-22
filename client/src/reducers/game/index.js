@@ -1,11 +1,11 @@
 import { types } from '../../actions/types';
-import config from "../../config";
 
 export default (state = {
   loading: false,
   error: null,
   totalCashAmount: 0,
-  businesses: {}
+  businesses: {},
+  businessesConfig: {}
 }, action) => {
   switch (action.type) {
     case types.BUY_BUSINESS_SUCCESS:
@@ -13,8 +13,10 @@ export default (state = {
     case types.INIT_GAME_SUCCESS:
       return { ...state, loading: false,
         error: null,
-        totalCashAmount: parseInt(action.payload.totalCashAmount), 
-        businesses: factoryBusinesses(action.payload.businesses) }
+        totalCashAmount: parseInt(action.payload.gameState.totalCashAmount), 
+        businesses: factoryBusinesses(action.payload.gameState.businesses),
+        businessesConfig: action.payload.businessesConfig
+      }
     case types.INIT_GAME_ERROR:
       return { ...state, loading: false, error: action.payload }
     case types.INIT_GAME:
@@ -38,7 +40,7 @@ function factoryBusinesses(businessesServerResult) {
 }
 
 function buyBusiness(state, action) {
-  const businessPrice = config.businesses[action.payload.businessKey].price;
+  const businessPrice = state.businessesConfig[action.payload.businessKey].price;
   const newState = { ...state };
 
   if (state.totalCashAmount >= businessPrice) {

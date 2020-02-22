@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import config from "../../config";
-
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
 import { types } from "../../actions/types";
@@ -12,6 +10,7 @@ import "./index.css";
 export const Game = () => {
   const totalCashAmount = useSelector((state) => state.game.totalCashAmount); 
   const businesses = useSelector((state) => state.game.businesses);
+  const businessesConfig = useSelector((state) => state.game.businessesConfig);
   const dispatch = useDispatch();
 
     return (
@@ -19,16 +18,17 @@ export const Game = () => {
         <Cash amount={totalCashAmount} />
         <div className="game-businesses-container">
           <div className="game-businesses-list">
-            {Object.keys(config.businesses).map((businessKey) => <Business
+            {Object.keys(businessesConfig).map((businessKey) => <Business
                key={businessKey}
                businessKey={businessKey}
                onBuyBusiness={(payload) => () => dispatch({type: types.BUY_BUSINESS, payload: payload})}
-               title={config.businesses[businessKey].title} 
-               type={businessKey} 
-               managersBasePrice={config.businesses[businessKey].managersBasePrice}
-               price={config.businesses[businessKey].price}
+               title={businessesConfig[businessKey].title} 
+               type={businessKey}
+               managersBasePrice={businessesConfig[businessKey].managersBasePrice}
+               price={businessesConfig[businessKey].price}
                owner={businesses[businessKey] ? true : false}
                totalCashAmount={totalCashAmount}
+               picture={businessesConfig[businessKey].picture}
                />)}
           </div>
         </div>
