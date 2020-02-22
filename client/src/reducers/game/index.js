@@ -8,19 +8,30 @@ export default (state = {
   businessesConfig: {}
 }, action) => {
   switch (action.type) {
-    case types.BUY_BUSINESS_SUCCESS:
-      return buyBusiness(state, action);
+
+    // Init Game
     case types.INIT_GAME_SUCCESS:
-      return { ...state, loading: false,
+      return {
+        ...state, loading: false,
         error: null,
-        totalCashAmount: parseInt(action.payload.gameState.totalCashAmount), 
+        totalCashAmount: parseInt(action.payload.gameState.totalCashAmount),
         businesses: factoryBusinesses(action.payload.gameState.businesses),
         businessesConfig: action.payload.businessesConfig
-      }
+      };
     case types.INIT_GAME_ERROR:
-      return { ...state, loading: false, error: action.payload }
+      return { ...state, loading: false, error: action.payload };
     case types.INIT_GAME:
-      return { ...state, loading: true, error: null }
+      return { ...state, loading: true, error: null };
+
+    // Buy Business
+    case types.BUY_BUSINESS_SUCCESS:
+      return buyBusiness(state, action);
+
+    // Orders
+    case types.MANAGE_ORDER:
+      return manageOrder(state, action);
+    case types.MANAGE_ORDER_SUCCESS:
+      return state;
     default:
       return state;
   }
@@ -31,9 +42,9 @@ function factoryBusinesses(businessesServerResult) {
 
   businessesServerResult.map((business) => {
     return businesses[business.businessKey] = {
-        owner: true,
-        managers: business.managers
-      }
+      owner: true,
+      managers: business.managers
+    }
   });
 
   return businesses
@@ -50,8 +61,23 @@ function buyBusiness(state, action) {
       managers: []
     }
 
-    newState.businesses[action.payload.businessKey] = {...newState.businesses[action.payload.businessKey]};
+    newState.businesses[action.payload.businessKey] = { ...newState.businesses[action.payload.businessKey] };
   }
+
+  return { ...newState, businesses: { ...newState.businesses } };
+}
+
+function manageOrder(state, action) {
+  const newState = {...state};
+  const businessKey = action.payload;
+  const business = newState.businesses[businessKey];
+
+  business.processingOrder = true;
+  business.timer = newState.businessesConfig[businessKey].orderBaseTimer;
+
+  newState.businesses[businessKey] = business;
+
+  newState.businesses[businessKey] = { ...newState.businesses[businessKey] };
 
   return {...newState, businesses: {...newState.businesses}};
 }

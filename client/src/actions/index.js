@@ -14,3 +14,9 @@ export function buyBusiness(businessKey) {
   }
 }
 
+export function manageOrder(businessKey) {
+  return {
+    type: types.MANAGE_ORDER,
+    payload: businessKey
+  }
+}
