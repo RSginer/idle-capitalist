@@ -12,14 +12,19 @@ function GameRepository() {
   }
 
   async function findOne() {
-    const res = await GameDTO.findOne();
+    const res = await GameDTO.findOne().populate('businesses');
     debug('GameRepository.findOne', res);
     return res;
   }
 
+  async function save(game) {
+    return await game.save();
+  }
+
   return {
     create,
-    findOne
+    findOne,
+    save
   }
 }
 

@@ -27,7 +27,7 @@ export const Game = () => {
                type={businessKey} 
                managersBasePrice={config.businesses[businessKey].managersBasePrice}
                price={config.businesses[businessKey].price}
-               owner={businesses[businessKey].owner}
+               owner={businesses[businessKey] ? true : false}
                totalCashAmount={totalCashAmount}
                />)}
           </div>
