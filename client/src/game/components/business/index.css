@@ -97,7 +97,8 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  height: calc(100% - 2px);
+  height: 100%;
+  top: 0px;
   justify-content: center;
   align-items: center;
 }
