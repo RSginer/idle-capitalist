@@ -17,7 +17,7 @@ export default (state = {
   }
 }, action) => {
   switch (action.type) {
-    case types.BUY_BUSINESS:
+    case types.BUY_BUSINESS_SUCCESS:
       return buyBusiness(state, action);
     case types.INIT_GAME_SUCCESS:
       return { ...state, loading: false, error: null }
