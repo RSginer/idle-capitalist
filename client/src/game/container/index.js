@@ -10,12 +10,13 @@ import { types } from "../../actions/types";
 import "./index.css";
 
 export const Game = () => {
+  const totalCashAmount = useSelector((state) => state.game.totalCashAmount); 
   const businesses = useSelector((state) => state.game.businesses);
   const dispatch = useDispatch();
 
     return (
       <div>
-        <Cash amount={businesses.totalCashAmount} />
+        <Cash amount={totalCashAmount} />
         <div className="game-businesses-container">
           <div className="game-businesses-list">
             {Object.keys(config.businesses).map((businessKey) => <Business
