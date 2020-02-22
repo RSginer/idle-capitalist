@@ -7,7 +7,7 @@
   },
   "businesses": {
     "lemonade": {
-      "price": 0,
+      "price": 50,
       "title": "Lemonade",
       "managersBasePrice": 200
     },
@@ -18,7 +18,7 @@
     }
   },
   "initialGameState": {
-    "totalCashAmount": 0,
+    "totalCashAmount": 100,
     "businesses": []
   }
 }

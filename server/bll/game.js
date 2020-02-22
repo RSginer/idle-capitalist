@@ -37,7 +37,9 @@ function GameBll() {
       if (Object.keys(businessesConfig).includes(businessKey)) {
         let business = await businessRepository.findByBusinessKey(businessKey);
   
-        if (!business) {
+        if (!business && currentGame.totalCashAmount >= businessesConfig[businessKey].price) {
+          currentGame.totalCashAmount -= businessesConfig[businessKey].price;
+  
           business = await businessRepository.create({
             businessKey: businessKey,
             level: 1,
