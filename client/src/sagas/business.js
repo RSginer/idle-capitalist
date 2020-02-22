@@ -1,16 +1,12 @@
 import { put, takeEvery, call, all } from 'redux-saga/effects'
-import { fetchInit } from "../services";
-
-import { types } from "../actions/types";
 import config from "../config";
 
-function* buyBussiness(action) {
-    const serverAction = {
-      command: 'buyBusiness',
-      message: action.payload
-    }
+import { fetchInit } from "../services";
+import * as serverActions from '../actions/server';
+import { types } from "../actions/types";
 
-    yield put({type: types.WS_MESSAGE, payload: serverAction});
+function* buyBussiness(action) {
+    yield put({type: types.WS_MESSAGE, payload: serverActions.buyBusiness(action.payload)});
 }
 
 function* buyBusinessSaga() {
