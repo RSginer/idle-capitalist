@@ -5,22 +5,16 @@ export default (state = {
   loading: false,
   error: null,
   totalCashAmount: 0,
-  businesses: {
-    lemonade: {
-      owner: false,
-      managers: []
-    },
-    bakery: {
-      owner: false,
-      managers: []
-    }
-  }
+  businesses: {}
 }, action) => {
   switch (action.type) {
     case types.BUY_BUSINESS_SUCCESS:
       return buyBusiness(state, action);
     case types.INIT_GAME_SUCCESS:
-      return { ...state, loading: false, error: null, totalCashAmount: action.payload.totalCashAmount, businesses: factoryBusinesses(action.payload.businesses) }
+      return { ...state, loading: false,
+        error: null,
+        totalCashAmount: parseInt(action.payload.totalCashAmount), 
+        businesses: factoryBusinesses(action.payload.businesses) }
     case types.INIT_GAME_ERROR:
       return { ...state, loading: false, error: action.payload }
     case types.INIT_GAME:
@@ -53,6 +47,8 @@ function buyBusiness(state, action) {
       owner: true,
       managers: []
     }
+
+    newState.businesses[action.payload.businessKey] = {...newState.businesses[action.payload.businessKey]};
   }
 
   return {...newState, businesses: {...newState.businesses}};
