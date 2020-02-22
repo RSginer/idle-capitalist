@@ -36,10 +36,10 @@ function buyBusiness(state, action) {
 
   if (state.totalCashAmount >= businessPrice) {
     newState.totalCashAmount -= businessPrice;
-    const business = newState[action.payload];
+    const business = newState.businesses[action.payload];
     business.owner = true;
-    newState[action.payload] = Object.assign({}, business);
+    newState.businesses[action.payload] = Object.assign({}, business);
   }
 
-  return newState;
+  return {...newState, businesses: {...newState.businesses}};
 }

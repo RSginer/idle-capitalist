@@ -18,6 +18,9 @@ function GameWebsocketController(ws) {
         debug(`command: ${parsedMessage.command} payload: ${parsedMessage.payload}`);
         gameCommandsManager.execCommand(parsedMessage.command, parsedMessage.payload);
       } else {
+        if (!parsedMessage.command) {
+          parsedMessage.command = 'undefined';
+        }
         ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command));
       }
     } catch(err) {
