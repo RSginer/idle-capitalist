@@ -12,6 +12,10 @@ export const Game = () => {
   const businessesConfig = useSelector((state) => state.game.businessesConfig);
   const dispatch = useDispatch();
 
+  const onBuyBusiness = (payload) => () => {
+    dispatch(buyBusiness(payload))
+  }
+
     return (
       <div>
         <Cash amount={totalCashAmount} />
@@ -20,7 +24,7 @@ export const Game = () => {
             {Object.keys(businessesConfig).map((businessKey) => <Business
                key={businessKey}
                businessKey={businessKey}
-               onBuyBusiness={(payload) => () => dispatch(buyBusiness(payload))}
+               onBuyBusiness={onBuyBusiness}
                title={businessesConfig[businessKey].title} 
                type={businessKey}
                managersBasePrice={businessesConfig[businessKey].managersBasePrice}
