@@ -2,8 +2,8 @@
 
 const debug = require('debug')('idle-capitalist-server:controller');
 const util = require('../util');
-const clientCommands = require('../command/client');
-const serverCommands = require('../command/server');
+const clientCommands = require('../commands/client');
+const serverCommands = require('../commands/server');
 const GameCommandsManager = require('../events/game');
 
 class GameController {

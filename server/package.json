@@ -26,10 +26,12 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "config": "^3.2.6",
     "cors": "^2.8.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "mongoose": "^5.9.2",
     "uuid": "^3.4.0",
     "ws": "^7.2.1"
   }

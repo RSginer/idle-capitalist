@@ -8,17 +8,16 @@ const uuid = require('uuid');
 const WebSocket = require('ws');
 const cors = require('cors');
 const app = express();
+const config = require('config');
 
-const GameController = require('./controller/game');
+const setupDB = require('./db');
 
-// Map to store websockets for each user
-const map = new Map();
+setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`);
+
+const GameController = require('./controllers/game');
 
 app.use(cors());
-//
-// We need the same instance of the session parser in express and
-// WebSocket server.
-//
+
 const sessionParser = session({
   saveUninitialized: false,
   secret: '$eCuRiTy',
@@ -32,7 +31,6 @@ app.post('/initGame', function (req, res) {
   return res.send({ userId: 1 });
 });
 
-
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ clientTracking: false, noServer: true });
 
@@ -44,7 +42,6 @@ server.on('upgrade', function (request, socket, head) {
 
 wss.on('connection', function (ws, request) {
   const gameController = new GameController(ws);
-
 
   ws.on('message', function (message) {
     gameController.onMessage(message);

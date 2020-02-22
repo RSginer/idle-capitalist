@@ -1,8 +1,10 @@
 'use strict';
 
 const EventEmitter = require('events');
-const clientCommands = require('../command/client');
-const serverCommands = require('../command/server');
+const clientCommands = require('../commands/client');
+const serverCommands = require('../commands/server');
+
+const gameBll = require('../bll/game')();
 
 const debug = require('debug')('idle-capitalist-server:events');
 
@@ -14,7 +16,7 @@ function GameCommandsManager(ws) {
   eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
 
 
-  function onBuyBusiness(businessType) {
+  async function onBuyBusiness(businessType) {
     debug(businessType)
   }
 
