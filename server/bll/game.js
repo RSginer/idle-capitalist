@@ -7,14 +7,12 @@ const config = require('config');
 function GameBll() {
 
   const gameRepository = GameRepository();
-  debug(gameRepository)
 
   async function initGame() {
     let currentGame;
 
     try {
       currentGame = await gameRepository.findOne();
-      debug(currentGame)
     } catch (err) {
       debug(err)
     }

@@ -10,8 +10,7 @@ import { types } from "../../actions/types";
 import "./index.css";
 
 export const Game = () => {
-  const userId = useSelector((state) => state.player.userId);
-  const businesses = useSelector((state) => state.businesses);
+  const businesses = useSelector((state) => state.game.businesses);
   const dispatch = useDispatch();
 
     return (

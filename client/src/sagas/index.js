@@ -6,7 +6,7 @@ import { types } from "../actions/types";
 function* initGame() {
   try {
     const initRes = yield call(fetchInit);
-    yield put({ type: types.INIT_GAME_SUCCESS, payload: initRes });
+    yield put({ type: types.INIT_GAME_SUCCESS, payload: initRes.data });
   } catch (e) {
     yield put({ type: types.INIT_GAME_ERROR, payload: e.message });
   }

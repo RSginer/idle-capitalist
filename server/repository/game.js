@@ -1,13 +1,20 @@
+'use strict';
+
 const GameDTO = require('../db/models/game');
+const debug = require('debug')('idle-capitalist-server:repository');
 
 function GameRepository() {
 
   async function create(game) {
-    return await GameDTO.create(game);
+    const res = await GameDTO.create(game);
+    debug('GameRepository.create', res);
+    return res;
   }
 
   async function findOne() {
-    return await GameDTO.findOne();
+    const res = await GameDTO.findOne();
+    debug('GameRepository.findOne', res);
+    return res;
   }
 
   return {

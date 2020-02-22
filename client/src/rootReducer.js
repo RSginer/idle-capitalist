@@ -1,11 +1,7 @@
 import { combineReducers } from 'redux';
 
-import player from './reducers/player';
-import businesses from './reducers/businesses';
-import ui from './reducers/ui';
+import game from './reducers/game';
 
 export default () => combineReducers({
-  player,
-  businesses,
-  ui
+  game
 })

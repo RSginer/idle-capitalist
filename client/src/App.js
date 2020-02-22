@@ -9,8 +9,8 @@ import './App.css';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.ui.loading);
-  const error = useSelector((state) => state.ui.error);
+  const loading = useSelector((state) => state.game.loading);
+  const error = useSelector((state) => state.game.error);
 
   useEffect(() => {
     dispatch({ type: types.INIT_GAME });
