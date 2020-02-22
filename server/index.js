@@ -18,7 +18,7 @@ setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.p
 const GameWebsocketController = require('./controllers/ws');
 const GameHttpController = require('./controllers/http');
 
-const gameHttpController = new GameHttpController();
+const gameHttpController = GameHttpController();
 
 app.use(cors());
 
@@ -43,7 +43,7 @@ server.on('upgrade', function (request, socket, head) {
 
 wss.on('connection', function (ws, request) {
   debug('ws connection start');
-  const gameController = new GameWebsocketController(ws);
+  const gameController = GameWebsocketController(ws);
 
   ws.on('message', function (message) {
     debug('ws message');

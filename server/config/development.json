@@ -4,5 +4,21 @@
     "port": 27017,
     "protocol": "mongodb://",
     "database": "idle-capitalist"
+  },
+  "businesses": {
+    "lemonade": {
+      "price": 0,
+      "title": "Lemonade",
+      "managersBasePrice": 200
+    },
+    "bakery": {
+      "price": 2000,
+      "title": "Bakery",
+      "managersBasePrice": 200
+    }
+  },
+  "initialGameState": {
+    "totalCashAmount": 0,
+    "businesses": []
   }
 }

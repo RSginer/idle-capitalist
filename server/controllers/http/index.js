@@ -1,8 +1,24 @@
+const debug = require('debug')('idle-capitalist-server:controller');
 
-class GameHttpController {
+const GameBll = require('../../bll/game');
 
-  async initGame(req, res) {
-    return res.send({userId: 1})
+function GameHttpController() {
+
+  const gameBll = GameBll();
+
+  async function initGame(req, res) {
+    try {
+      const currentGame = await gameBll.initGame();
+      return res.send(currentGame);
+    } catch (err) {
+      debug(err)
+      res.status(500);
+      return res.send(err)
+    }
+  }
+
+  return {
+    initGame
   }
 }
 

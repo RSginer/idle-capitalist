@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 
-const BusinessSchema = mongoose.Schema({
-  type: String,
-  level: Number,
-})
-
 const GameSchema = mongoose.Schema({
   totalCashAmount: String,
-  businesses: [BusinessSchema]
+  businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}]
 });
 
 module.exports = mongoose.model('Game', GameSchema);

@@ -15,20 +15,22 @@ function GameCommandsManager(ws) {
   // Listen Events
   eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
 
+
+  // Methods
   async function onBuyBusiness(businessType) {
     try {
       const buyBusinessResult = await gameBll.buyBusiness(businessType)
 
       if (buyBusinessResult) {
         ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_SUCCESS, buyBusinessResult));
-      } else {
-        ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_ERROR, err));
       }
-    } catch (err) {
+
+      } catch (err) {
       ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_ERROR, err));
     }
   }
 
+  // Public API
   function execCommand(command, payload) {
     eventEmitter.emit(command, payload);
   }

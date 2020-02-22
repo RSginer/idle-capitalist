@@ -6,22 +6,19 @@ const clientCommands = require('../../commands/client');
 const serverCommands = require('../../commands/server');
 const GameCommandsManager = require('../../events/game');
 
-class GameWebsocketController {
 
-  constructor(ws) {
-    this.ws = ws;
-    this.gameCommandsManager = GameCommandsManager(ws);
-  }
+function GameWebsocketController(ws) {
+  const gameCommandsManager = GameCommandsManager(ws);
 
-  onMessage(message) {
+  function onMessage(message) {
     try {
       const parsedMessage = JSON.parse(message);
 
       if (Object.values(serverCommands).includes(parsedMessage.command)) {
         debug(`command: ${parsedMessage.command} payload: ${parsedMessage.payload}`);
-        this.gameCommandsManager.execCommand(parsedMessage.command, parsedMessage.payload);
+        gameCommandsManager.execCommand(parsedMessage.command, parsedMessage.payload);
       } else {
-        this.ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command));
+        ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command));
       }
     } catch(err) {
       debug(err);
@@ -29,9 +26,14 @@ class GameWebsocketController {
     }
   }
 
-  close() {
+  function close() {
     // update last game date
   }
+  return {
+    onMessage,
+    close
+  }
 }
+
 
 module.exports = GameWebsocketController;
