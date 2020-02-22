@@ -17,7 +17,7 @@ export const App = () => {
   }, []);
   return (
     <div className="App">
-      <h1>Adventure Capitalist</h1>
+      <h1><a href="https://github.com/RSginer" target="_blank">@RSGiner</a> - Idle Capitalist</h1>
       <div className="container">
         {
           !loading && !error && <Game />

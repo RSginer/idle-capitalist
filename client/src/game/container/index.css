@@ -1,15 +1,10 @@
-.userId {
-  font-size: 0.5em;
-  font-weight: bold;
-  position: absolute;
-  top: 2px;
-  left: 15px;
-  color: #222;
-}
-
 .game-businesses-list {
-  font-size: 1.2em;
-}
-.game-businesses-container {
+  height: 522px;
   padding: 10px;
+  border: 2px solid #0000ff;
+  border-radius: 4px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  overflow-y: scroll;
+  font-size: 1.2em;
 }

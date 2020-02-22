@@ -17,6 +17,12 @@
       "picture": "https://www.vedeqsa.com/wp-content/uploads/revslider/panaderia/microencapsulated-acid-bakery-products-long-shelf-life-mircap-vedeqsa-.jpg",
       "managersBasePrice": 200,
       "price": 2000
+    },
+    "superMarket": {
+      "title": "Super Market",
+      "picture": "https://www.vedeqsa.com/wp-content/uploads/revslider/panaderia/microencapsulated-acid-bakery-products-long-shelf-life-mircap-vedeqsa-.jpg",
+      "managersBasePrice": 500,
+      "price": 5000
     }
   },
   "initialGameState": {

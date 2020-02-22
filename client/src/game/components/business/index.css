@@ -3,7 +3,6 @@
   background-color: green;
   border-radius: 4px;
   border: 2px solid green;
-  border-bottom: none;
   position: relative;
 }
 
@@ -102,6 +101,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .unlock-business {
   font-size: 1.6em;
   margin-bottom: 20px;
