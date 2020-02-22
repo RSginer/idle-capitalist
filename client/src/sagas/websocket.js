@@ -1,5 +1,4 @@
-import { put, takeEvery, call, all } from 'redux-saga/effects'
-import { fetchInit } from "../services";
+import { put, takeEvery, all } from 'redux-saga/effects'
 
 import { types } from "../actions/types";
 import { wsConnect } from "../actions/websocket";

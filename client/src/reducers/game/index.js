@@ -30,10 +30,10 @@ function factoryBusinesses(businessesServerResult) {
   let businesses = {};
 
   businessesServerResult.map((business) => {
-    businesses[business.businessKey] = {
-      owner: true,
-      managers: business.managers
-    }
+    return businesses[business.businessKey] = {
+        owner: true,
+        managers: business.managers
+      }
   });
 
   return businesses

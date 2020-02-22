@@ -1,7 +1,5 @@
-import { put, takeEvery, call, all } from 'redux-saga/effects'
-import config from "../config";
+import { put, takeEvery, all } from 'redux-saga/effects'
 
-import { fetchInit } from "../services";
 import * as serverActions from '../actions/server';
 import { types } from "../actions/types";
 

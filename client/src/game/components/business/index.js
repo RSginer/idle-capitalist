@@ -2,7 +2,6 @@ import React from 'react';
 import CurrencyFormat from "react-currency-format";
 import "./index.css";
 
-import config from "../../../config";
 import { Line } from "rc-progress";
 
 export const Business = (props) => {

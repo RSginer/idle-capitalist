@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Game from './game/container';
 import { GameLoading } from './game/components/loading';
 import { GameError } from './game/components/error';
-import { connect, useState, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { initGame } from "./actions";
 
 import './App.css';
@@ -14,10 +14,10 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(initGame());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="App">
-      <h1><a href="https://github.com/RSginer" target="_blank">@RSGiner</a> - Idle Capitalist</h1>
+      <h1><a href="https://github.com/RSginer" rel="noopener noreferrer" target="_blank">@RSGiner</a> - Idle Capitalist</h1>
       <div className="container">
         {
           !loading && !error && <Game />

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { buyBusiness } from '../../actions';
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
-import { types } from "../../actions/types";
 
 import "./index.css";
 
