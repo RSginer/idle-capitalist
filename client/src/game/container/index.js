@@ -11,13 +11,12 @@ import "./index.css";
 
 export const Game = () => {
   const userId = useSelector((state) => state.player.userId);
-  const cashAmount = useSelector((state) => state.player.cashAmount);
   const businesses = useSelector((state) => state.businesses);
   const dispatch = useDispatch();
 
     return (
       <div>
-        <Cash amount={cashAmount} />
+        <Cash amount={businesses.totalCashAmount} />
         <div className="game-businesses-container">
           <div className="game-businesses-list">
             {Object.keys(config.businesses).map((businessKey) => <Business
@@ -29,6 +28,7 @@ export const Game = () => {
                managersBasePrice={config.businesses[businessKey].managersBasePrice}
                price={config.businesses[businessKey].price}
                owner={businesses[businessKey].owner}
+               totalCashAmount={businesses.totalCashAmount}
                />)}
           </div>
         </div>

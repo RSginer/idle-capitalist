@@ -10,7 +10,7 @@ export const Business = (props) => {
     <div className="business-container" style={{borderColor: props.owner ? 'green' : 'gray'}}>
       { !props.owner && <div className="business-without-owner">
         <span className="unlock-business">Acquire this business to unlock it</span>
-        <button onClick={props.onBuyBusiness(props.businessKey)} className="unlock-business-button">
+        <button disabled={props.totalCashAmount < config.businesses[props.businessKey].price} onClick={props.onBuyBusiness(props.businessKey)} className="unlock-business-button">
           Buy <CurrencyFormat value={props.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         </button>
       </div>}

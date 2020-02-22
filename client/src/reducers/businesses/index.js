@@ -1,6 +1,8 @@
 import { types } from '../../actions/types';
+import config from "../../config";
 
 export default (state = {
+  totalCashAmount: 0,
   lemonade: {
     owner: false,
     managers: []
@@ -19,9 +21,15 @@ export default (state = {
 }
 
 function buyBusiness(state, action) {
-  const business = state[action.payload];
-  business.owner = true;
+  const businessPrice = config.businesses[action.payload].price;
   const newState = {...state};
-  newState[action.payload] = Object.assign({}, business);
+
+  if (state.totalCashAmount >= businessPrice) {
+    newState.totalCashAmount -= businessPrice;
+    const business = newState[action.payload];
+    business.owner = true;
+    newState[action.payload] = Object.assign({}, business);
+  }
+
   return newState;
 }

@@ -114,3 +114,8 @@
   outline: none;
   color: white;
 }
+
+.unlock-business-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
