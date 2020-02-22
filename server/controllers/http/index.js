@@ -1,0 +1,5 @@
+
+
+function initGameController(req, res) {
+  
+}

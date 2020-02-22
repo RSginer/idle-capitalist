@@ -1,8 +1,15 @@
+const Game = require('../db/models/game');
 
 function GameBll() {
 
-  return {
+  async function buyBusiness(businessType) {
+    return {
+      ok: true
+    }
+  }
 
+  return {
+    buyBusiness
   }
 }
 

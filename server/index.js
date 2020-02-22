@@ -14,7 +14,7 @@ const setupDB = require('./db');
 
 setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`);
 
-const GameController = require('./controllers/game');
+const GameController = require('./controllers/ws');
 
 app.use(cors());
 
@@ -41,14 +41,17 @@ server.on('upgrade', function (request, socket, head) {
 });
 
 wss.on('connection', function (ws, request) {
+  debug('ws connection start');
   const gameController = new GameController(ws);
 
   ws.on('message', function (message) {
+    debug('ws message');
     gameController.onMessage(message);
   });
 
   ws.on('close', function () {
     gameController.close();
+    debug('ws connection close');
   });
 });
 
