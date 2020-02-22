@@ -7,6 +7,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import initialSaga from "./sagas";
 import websocketConnectionSaga from "./sagas/websocket";
+import businessesSaga from "./sagas/business";
+
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -37,6 +39,8 @@ const store = configureStore();
 // SAGAS
 sagaMiddleware.run(initialSaga);
 sagaMiddleware.run(websocketConnectionSaga);
+sagaMiddleware.run(businessesSaga);
+
 
 
 export default store;

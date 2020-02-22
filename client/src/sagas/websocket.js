@@ -1,4 +1,4 @@
-import { put, takeEvery, call } from 'redux-saga/effects'
+import { put, takeEvery, call, all } from 'redux-saga/effects'
 import { fetchInit } from "../services";
 
 import { types } from "../actions/types";
@@ -13,4 +13,8 @@ function* websocketConnectionSaga() {
   yield takeEvery(types.INIT_GAME_SUCCESS, connectWebsocket);
 }
 
-export default websocketConnectionSaga;
+export default function* rootSaga() {
+  yield all([
+    websocketConnectionSaga()
+  ])
+}

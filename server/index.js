@@ -9,6 +9,9 @@ const WebSocket = require('ws');
 const cors = require('cors');
 const app = express();
 
+const GameController = require('./controller/game');
+const gameController = new GameController();
+
 // Map to store websockets for each user
 const map = new Map();
 
@@ -78,11 +81,12 @@ wss.on('connection', function (ws, request) {
     //
     // Here we can now use session parameters.
     //
-    debug(`Received message ${message} from user ${userId}`);
+    gameController.onMessage(ws, message);
+    // debug(`Received message ${message} from user ${userId}`);
   });
 
   ws.on('close', function () {
-    map.delete(userId);
+    // map.delete(userId);
   });
 });
 

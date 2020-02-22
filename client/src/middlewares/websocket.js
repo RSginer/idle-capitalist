@@ -15,11 +15,14 @@ const socketMiddleware = () => {
   };
 
   const onMessage = store => (event) => {
-    const wsMessage = JSON.parse(event.data);
-
+    const wsMessage = event.data;
     if (wsMessage) {
-      let wsMessageJSON = JSON.parse(wsMessage);
-      store.dispatch({ type: wsMessage.type, payload: wsMessage.payload });
+      try {
+        const message = JSON.parse(wsMessage);
+        store.dispatch({ type: message.type, payload: message.payload });        
+      } catch (error) {
+        console.error(error);     
+      }
     }
   };
 
@@ -47,7 +50,7 @@ const socketMiddleware = () => {
         socket = null;
         break;
       case types.WS_MESSAGE:
-        socket.send(JSON.stringify({ command: 'NEW_MESSAGE', payload: action.payload }));
+        socket.send(JSON.stringify({ command: action.payload.command, payload: action.payload.message }));
         break;
       default:
         return next(action);
