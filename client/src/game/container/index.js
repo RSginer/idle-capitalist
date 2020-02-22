@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { buyBusiness } from '../../actions';
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
 import { types } from "../../actions/types";
@@ -21,7 +21,7 @@ export const Game = () => {
             {Object.keys(businessesConfig).map((businessKey) => <Business
                key={businessKey}
                businessKey={businessKey}
-               onBuyBusiness={(payload) => () => dispatch({type: types.BUY_BUSINESS, payload: payload})}
+               onBuyBusiness={(payload) => () => dispatch(buyBusiness(payload))}
                title={businessesConfig[businessKey].title} 
                type={businessKey}
                managersBasePrice={businessesConfig[businessKey].managersBasePrice}

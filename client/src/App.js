@@ -3,7 +3,7 @@ import Game from './game/container';
 import { GameLoading } from './game/components/loading';
 import { GameError } from './game/components/error';
 import { connect, useState, useSelector, useDispatch } from 'react-redux';
-import { types } from "./actions/types";
+import { initGame } from "./actions";
 
 import './App.css';
 
@@ -13,7 +13,7 @@ export const App = () => {
   const error = useSelector((state) => state.game.error);
 
   useEffect(() => {
-    dispatch({ type: types.INIT_GAME });
+    dispatch(initGame());
   }, []);
   return (
     <div className="App">
