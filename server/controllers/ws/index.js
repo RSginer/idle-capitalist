@@ -6,7 +6,7 @@ const clientCommands = require('../../commands/client');
 const serverCommands = require('../../commands/server');
 const GameCommandsManager = require('../../events/game');
 
-class GameController {
+class GameWebsocketController {
 
   constructor(ws) {
     this.ws = ws;
@@ -34,4 +34,4 @@ class GameController {
   }
 }
 
-module.exports = GameController;
+module.exports = GameWebsocketController;

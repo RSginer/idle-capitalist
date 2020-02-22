@@ -1,5 +1,9 @@
 
+class GameHttpController {
 
-function initGameController(req, res) {
-  
+  async initGame(req, res) {
+    return res.send({userId: 1})
+  }
 }
+
+module.exports = GameHttpController;

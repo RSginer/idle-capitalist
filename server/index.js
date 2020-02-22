@@ -14,7 +14,11 @@ const setupDB = require('./db');
 
 setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`);
 
-const GameController = require('./controllers/ws');
+// Controllers
+const GameWebsocketController = require('./controllers/ws');
+const GameHttpController = require('./controllers/http');
+
+const gameHttpController = new GameHttpController();
 
 app.use(cors());
 
@@ -26,10 +30,7 @@ const sessionParser = session({
 
 app.use(sessionParser);
 
-app.post('/initGame', function (req, res) {
-
-  return res.send({ userId: 1 });
-});
+app.post('/initGame', gameHttpController.initGame);
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ clientTracking: false, noServer: true });
@@ -42,7 +43,7 @@ server.on('upgrade', function (request, socket, head) {
 
 wss.on('connection', function (ws, request) {
   debug('ws connection start');
-  const gameController = new GameController(ws);
+  const gameController = new GameWebsocketController(ws);
 
   ws.on('message', function (message) {
     debug('ws message');
