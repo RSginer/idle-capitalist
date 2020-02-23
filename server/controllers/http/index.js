@@ -11,10 +11,12 @@ function GameHttpController() {
     try {
       const initGameResult = await gameBll.initGame();
       const businessesConfig = config.get('businesses');
+      const firstBusinessConfigKey = Object.keys(businessesConfig)[0]
+      const firstBusinessInitialTime = businessesConfig[firstBusinessConfigKey].initialTime;
       const response = {
         gameState: initGameResult.currentGame,
         businessesConfig,
-        showIdleDialog: !initGameResult.isNewGame,
+        showIdleDialog: !initGameResult.isNewGame && initGameResult.idleTime > firstBusinessInitialTime && initGameResult.hasManagers,
         idleRevenue: initGameResult.idleRevenue,
         idleTime: initGameResult.idleTime
       }

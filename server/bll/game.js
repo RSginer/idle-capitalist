@@ -15,6 +15,7 @@ function GameBll() {
     let isNewGame = false;
     let revenue = 0;
     let time = 0;
+    let hasManagers = false;
 
     currentGame = await gameRepository.findOne();
 
@@ -31,18 +32,25 @@ function GameBll() {
   
       businesses && businesses.length > 0 && businesses.map((business) => {
         if (business.manager === true) {
+          hasManagers = true;
           // Calc revenue
           const initialProductivity = businessesConfig[business.businessKey].initialProductivity;
           revenue = (initialProductivity * business.level) * (time / 1000);
         }
       })
+
+      const totalCashAmount = parseFloat(currentGame.totalCashAmount);
+
+      currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100;
+      await gameRepository.save(currentGame); 
     }
 
     const result = {
       currentGame,
       isNewGame,
       idleRevenue: revenue,
-      idleTime: time
+      idleTime: time,
+      hasManagers
     }
 
     return result;

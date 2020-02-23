@@ -109,7 +109,7 @@ export const Game = () => {
   return (
     <div>
       <Cash amount={totalCashAmount} />
-      <Dialog opened={showIdleDialog} content={`You were offline for ${msToDHMS(idleTime).d} days ${msToDHMS(idleTime).h} hours ${msToDHMS(idleTime).m} minutes ${msToDHMS(idleTime).s} seconds, and your businesses generated $${idleRevenue} for you`}
+      <Dialog opened={showIdleDialog} content={`You were offline for ${msToDHMS(idleTime).d} days ${msToDHMS(idleTime).h} hours ${msToDHMS(idleTime).m} minutes ${msToDHMS(idleTime).s} seconds, and your businesses generated $${idleRevenue?.toFixed(2)} for you`}
        title="Welcome back!" actionText="Ok, thanks" onActionClick={() => onIdleDialogClose()} />
       <Dialog opened={!socketConnected} content="" title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
 
