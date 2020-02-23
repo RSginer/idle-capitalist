@@ -16,8 +16,8 @@ export const Business = (props) => {
       </div>}
       <div>
         <div className="business-level">{props.title} - level 1</div>
-        <div className="business-control" onClick={props.onManageOrder(props.businessKey)} style={{ backgroundImage: `url("${props.picture}")` }}>
-          {!props.processingOrder && <div className="business-control-label">
+        <div className="business-control" style={{ backgroundImage: `url("${props.picture}")` }}>
+          {!props.processingOrder && <div  onClick={props.onManageOrder(props.businessKey)} className="business-control-label">
             <span className="business-control-label-message">Click to manage order</span>
           </div>}
         </div>
