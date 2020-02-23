@@ -34,10 +34,10 @@ export const Game = () => {
       return '00:00:00'
     }
 
-    const secNum = ms / 1000; // don't forget the second param
-    var hours   = Math.floor(secNum / 3600);
-    var minutes = Math.floor((secNum - (hours * 3600)) / 60);
-    var seconds = Math.ceil(secNum - (hours * 3600) - (minutes * 60));
+    let secNum = ms / 1000;
+    let hours   = Math.floor(secNum / 3600);
+    let minutes = Math.floor((secNum - (hours * 3600)) / 60);
+    let seconds = Math.ceil(secNum - (hours * 3600) - (minutes * 60));
 
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
