@@ -109,7 +109,7 @@ function manageOrderFinish(state, action) {
   const newState = {...state};
   const businessKey = action.payload;
   const business = newState.businesses[businessKey];
-  let profit = newState.businessesConfig[businessKey].baseProfitOrder;
+  let profit = newState.businessesConfig[businessKey].initialRevenue;
 
   if (business.managers && business.managers.length > 0) {
     profit = profit * business.managers.length;
