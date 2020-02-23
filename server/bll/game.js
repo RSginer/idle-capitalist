@@ -64,6 +64,7 @@ function GameBll() {
 
   async function manageOrder(businessKey) {
     try {
+      // TODO: check if initialTime is out
       const businessesConfig = config.get(`businesses`);
       const currentGame = await gameRepository.findOne();
       const business = await businessRepository.findByBusinessKey(businessKey);
