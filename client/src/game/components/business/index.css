@@ -18,15 +18,22 @@
   height: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   cursor: pointer;
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
 }
 
 .business-control .business-control-label .business-control-label-message {
-  color: white;
+  color: white; 
 }
 
+.business-control .business-control-label .business-control-label-message-info {
+  color: #ccc;
+  margin-top: 5px;
+  font-size: 0.75em;
+  text-transform: capitalize;
+}
 .business-actions {
   margin-top: 2px;
   display: flex;

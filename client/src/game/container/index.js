@@ -62,6 +62,14 @@ export const Game = () => {
     return Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
   }
 
+  const getRevenue = (businessKey) => {
+    const level = (businesses[businessKey] ? businesses[businessKey].level : 1);
+    const initialTime = businessesConfig[businessKey].initialTime;
+    const initialProductivity = businessesConfig[businessKey].initialProductivity;
+    let profit = (initialProductivity * level) * (initialTime / 1000);
+    return Math.round(profit * 100) / 100;
+  }
+
   const onSocketDisconnected = () => {
     dispatch(wsConnect(config.websocketUrl))
   }
@@ -89,6 +97,8 @@ export const Game = () => {
             orderProgress={calcOrderProgress(businessKey, businesses[businessKey]?.timer)}
             costNextExpand={calcNextExpandCost(businessKey)}
             manager={businesses[businessKey]?.manager}
+            timeCost={msToHMS(businessesConfig[businessKey].initialTime)}
+            revenue={getRevenue(businessKey)}
           />)}
         </div>
       </div>
