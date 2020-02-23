@@ -1,8 +1,8 @@
 'use strict';
 
 const EventEmitter = require('events');
-const clientCommands = require('../commands/client');
-const serverCommands = require('../commands/server');
+const clientCommands = require('./types/client');
+const serverCommands = require('./types/server');
 const util = require('../util');
 const gameBll = require('../bll/game')();
 
