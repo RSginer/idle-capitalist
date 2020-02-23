@@ -6,7 +6,7 @@ export const Cash = (props) => {
   return (
     <div className="cash-container">
       <div className="user-picture">
-        <img src="https://png.pngtree.com/element_our/png_detail/20190103/business-man-line-black-icon-png_309140.jpg" alt="user"/>
+        <img src="https://avatars3.githubusercontent.com/u/14939307?s=460&v=4" alt="user"/>
       </div>
       <div className="cash-amount">
         <CurrencyFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} />

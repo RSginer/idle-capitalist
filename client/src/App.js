@@ -17,7 +17,7 @@ export const App = () => {
   }, [dispatch]);
   return (
     <div className="App">
-      <h1><a href="https://github.com/RSginer" rel="noopener noreferrer" target="_blank">@RSGiner</a> - Idle Capitalist</h1>
+      <h1>Rubén Soler <a href="https://github.com/RSginer" rel="noopener noreferrer" target="_blank">@RSGiner</a> - Idle Capitalist</h1>
       <div className="container">
         {
           !loading && !error && <Game />
