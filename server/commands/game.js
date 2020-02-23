@@ -30,7 +30,7 @@ function GameCommandsManager(ws) {
       }
 
     } catch (err) {
-      debug(err)
+      debug(`Buy business error ${businessKey}!`, err)
       ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_ERROR, err));
     }
   }
@@ -46,7 +46,7 @@ function GameCommandsManager(ws) {
       }
 
     } catch (err) {
-      debug(err)
+      debug(`Manage order error ${businessKey}!`, err)
       ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_ERROR, err));
     }
   }
@@ -61,7 +61,7 @@ function GameCommandsManager(ws) {
         debug(`Expanded business ${businessKey}!`);
       }
     } catch (err) {
-      debug(err)
+      debug(`Expanded business error ${businessKey}!`, err);
       ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_ERROR, err));
     }
   }
