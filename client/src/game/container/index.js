@@ -21,9 +21,12 @@ export const Game = () => {
   }
 
   const calcOrderProgress = (businessKey, ms) => {
+    if (ms <= 0 || !ms) {
+      return 0;
+    }
+  
     const timeLeft = businessesConfig[businessKey].baseOrderTimerInMs - ms;
-    console.log(timeLeft * businessesConfig[businessKey].baseOrderTimerInMs / 100)
-    return timeLeft * businessesConfig[businessKey].baseOrderTimerInMs / 100;
+    return timeLeft * 100 / businessesConfig[businessKey].baseOrderTimerInMs;
   }
 
   const msToHMS = (ms) => {
