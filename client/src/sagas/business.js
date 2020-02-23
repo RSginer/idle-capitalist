@@ -1,4 +1,4 @@
-import { put, takeEvery, all, call, take, fork, cancel, select } from 'redux-saga/effects'
+import { put, takeEvery, all, call, fork, select } from 'redux-saga/effects'
 
 import * as serverActions from '../actions/server';
 import { types } from "../actions/types";
@@ -36,7 +36,7 @@ function manageOrderDelay(businessKey) {
 
 function* manageOrderTimer() {
   yield takeEvery(types.MANAGE_ORDER, function* (action) {
-    const bgSyncTask = yield fork(manageOrderDelay(action.payload))
+    yield fork(manageOrderDelay(action.payload))
   })
 
 }
