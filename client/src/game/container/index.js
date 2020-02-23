@@ -56,7 +56,6 @@ export const Game = () => {
 
     return Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
   }
-  
 
   return (
     <div>
