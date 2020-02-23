@@ -56,7 +56,7 @@ function factoryBusinesses(businessesServerResult) {
 }
 
 function buyBusiness(state, action) {
-  const businessPrice = state.businessesConfig[action.payload.businessKey].price;
+  const businessPrice = state.businessesConfig[action.payload.businessKey].initialCost;
   const newState = { ...state };
 
   if (state.totalCashAmount >= businessPrice) {
@@ -78,7 +78,7 @@ function manageOrder(state, action) {
   const business = newState.businesses[businessKey];
 
   business.processingOrder = true;
-  business.timer = newState.businessesConfig[businessKey].baseOrderTimerInMs;
+  business.timer = newState.businessesConfig[businessKey].initialTime;
 
   newState.businesses[businessKey] = { ...business };
 
@@ -97,7 +97,7 @@ function manageOrderTick(state, action) {
     business.timer = 0;
   } else {
     business.processingOrder = true;
-    business.timer = newState.businessesConfig[businessKey].baseOrderTimerInMs;
+    business.timer = newState.businessesConfig[businessKey].initialTime;
   }
 
   newState.businesses[businessKey] = {...business };

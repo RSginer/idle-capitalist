@@ -25,8 +25,12 @@ export const Game = () => {
       return 0;
     }
 
-    const timeLeft = businessesConfig[businessKey].baseOrderTimerInMs - ms;
-    return timeLeft * 100 / businessesConfig[businessKey].baseOrderTimerInMs;
+
+
+    const timeLeft = businessesConfig[businessKey].initialTime - ms;
+    console.log(timeLeft)
+
+    return timeLeft * 100 / businessesConfig[businessKey].initialTime;
   }
 
   const msToHMS = (ms) => {
@@ -57,7 +61,7 @@ export const Game = () => {
             title={businessesConfig[businessKey].title}
             type={businessKey}
             managersBasePrice={businessesConfig[businessKey].managersBasePrice}
-            price={businessesConfig[businessKey].price}
+            price={businessesConfig[businessKey].initialCost}
             owner={businesses[businessKey]?.owner}
             totalCashAmount={totalCashAmount}
             picture={businessesConfig[businessKey].picture}
