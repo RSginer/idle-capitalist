@@ -24,7 +24,7 @@ export const Game = () => {
     if (ms <= 0 || !ms) {
       return 0;
     }
-  
+
     const timeLeft = businessesConfig[businessKey].baseOrderTimerInMs - ms;
     return timeLeft * 100 / businessesConfig[businessKey].baseOrderTimerInMs;
   }
@@ -34,16 +34,15 @@ export const Game = () => {
       return '00:00:00'
     }
 
-    // 1- Convert to seconds:
-    var seconds = ms / 1000;
-    // 2- Extract hours:
-    var hours = parseInt(seconds / 3600); // 3,600 seconds in 1 hour
-    seconds = seconds % 3600; // seconds remaining after extracting hours
-    // 3- Extract minutes:
-    var minutes = parseInt(seconds / 60); // 60 seconds in 1 minute
-    // 4- Keep only seconds not extracted to minutes:
-    seconds = seconds % 60;
-    return hours + ":" + minutes + ":" + seconds;
+    const secNum = ms / 1000; // don't forget the second param
+    var hours   = Math.floor(secNum / 3600);
+    var minutes = Math.floor((secNum - (hours * 3600)) / 60);
+    var seconds = Math.ceil(secNum - (hours * 3600) - (minutes * 60));
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+ seconds;}
+    return hours+':'+minutes+':'+seconds;
   }
 
   return (
