@@ -49,6 +49,8 @@ function GameBll() {
           currentGame.businesses.push(business.id);
           await gameRepository.save(currentGame);
 
+        } else {
+          throw new Error(`You don't have money to buy this`)
         }
         debug(business)
         return business;
