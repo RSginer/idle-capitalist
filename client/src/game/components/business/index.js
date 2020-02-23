@@ -25,15 +25,15 @@ export const Business = (props) => {
         <div className="business-actions">
           <div className="business-managers">
             <p className="business-managers-label">Hire Managers! -></p>
-            {[1, 2, 3].map((i, index) => <div key={index} className="business-manager">
+            {<div className="business-manager">
               <div className="manager-picture">
-                {props.managersBasePrice * i * (index > 0 ? index : 1)}$
+                {props.managersBasePrice}$
             </div>
-            </div>)}
+            </div>}
           </div>
           <div className="timer">{props.timer}</div>
           <div className="business-expand">
-            <button className="business-expand-btn">Expand $200</button>
+            <button className="business-expand-btn">Expand <CurrencyFormat value={props.costNextExpand} displayType={'text'} thousandSeparator={true} prefix={'$'} /></button>
           </div>
         </div>
       </div>

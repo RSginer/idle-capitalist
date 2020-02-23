@@ -75,7 +75,7 @@ function buyBusiness(state, action) {
 }
 
 function manageOrder(state, action) {
-  const newState = {...state};
+  const newState = { ...state };
   const businessKey = action.payload;
   const business = newState.businesses[businessKey];
 
@@ -84,17 +84,17 @@ function manageOrder(state, action) {
 
   newState.businesses[businessKey] = { ...business };
 
-  return {...newState, businesses: {...newState.businesses}};
+  return { ...newState, businesses: { ...newState.businesses } };
 }
 
 function manageOrderTick(state, action) {
-  const newState = {...state};
+  const newState = { ...state };
   const businessKey = action.payload;
   const business = newState.businesses[businessKey];
   if (business.timer > 0) {
     business.processingOrder = true;
     business.timer = business.timer - 100;
-  } else if (!business.managers || business.managers.length === 0){
+  } else if (!business.managers || business.managers.length === 0) {
     business.processingOrder = false;
     business.timer = 0;
   } else {
@@ -102,28 +102,27 @@ function manageOrderTick(state, action) {
     business.timer = newState.businessesConfig[businessKey].initialTime;
   }
 
-  newState.businesses[businessKey] = {...business };
+  newState.businesses[businessKey] = { ...business };
 
-  return {...newState, businesses: {...newState.businesses}};
+  return { ...newState, businesses: { ...newState.businesses } };
 }
 
 function manageOrderFinish(state, action) {
-  const newState = {...state};
+  const newState = { ...state };
   const businessKey = action.payload;
-  const business = newState.businesses[businessKey];  
+  const business = newState.businesses[businessKey];
 
   // calc revenue
-  const initialRevenue = newState.businessesConfig[businessKey].initialRevenue;
+  const initialTime = newState.businessesConfig[businessKey].initialTime;
   const initialProductivity = newState.businessesConfig[businessKey].initialProductivity;
-  
-  let profit = (initialProductivity * business.level);
+  let profit = (initialProductivity * business.level) * (initialTime / 1000);
 
-   if (business.managers && business.managers.length > 0) {
+  if (business.managers && business.managers.length > 0) {
     profit = profit * business.managers.length;
-  } 
+  }
 
   newState.totalCashAmount += profit;
   newState.totalCashAmount = Math.round(newState.totalCashAmount * 100) / 100;
 
-  return {...newState};
+  return { ...newState };
 }

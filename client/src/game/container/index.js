@@ -25,11 +25,8 @@ export const Game = () => {
       return 0;
     }
 
-
-
     const timeLeft = businessesConfig[businessKey].initialTime - ms;
-    console.log(timeLeft)
-
+    
     return timeLeft * 100 / businessesConfig[businessKey].initialTime;
   }
 
@@ -49,6 +46,17 @@ export const Game = () => {
 
     return hours + ':' + minutes + ':' + seconds;
   }
+
+  const calcNextExpandCost = (businessKey) => {
+    const rateGrowth = businessesConfig[businessKey].coefficient;
+
+    // Fix initial cost for limonade
+    const costBase = businessesConfig[businessKey].initialCost || 4;
+    const owned = businesses[businessKey] && businesses[businessKey].level ? businesses[businessKey].level : 1;
+
+    return Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
+  }
+  
 
   return (
     <div>
@@ -70,6 +78,7 @@ export const Game = () => {
             processingOrder={businesses[businessKey]?.processingOrder}
             timer={msToHMS(businesses[businessKey]?.timer)}
             orderProgress={calcOrderProgress(businessKey, businesses[businessKey]?.timer)}
+            costNextExpand={calcNextExpandCost(businessKey)}
           />)}
         </div>
       </div>
