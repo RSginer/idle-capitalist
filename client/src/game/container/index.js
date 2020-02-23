@@ -36,7 +36,7 @@ export const Game = () => {
   }
 
   const msToHMS = (ms) => {
-    if (!ms) {
+    if (!ms || ms <= 0) {
       return '00:00:00'
     }
 
@@ -88,6 +88,7 @@ export const Game = () => {
             timer={msToHMS(businesses[businessKey]?.timer)}
             orderProgress={calcOrderProgress(businessKey, businesses[businessKey]?.timer)}
             costNextExpand={calcNextExpandCost(businessKey)}
+            manager={businesses[businessKey]?.manager}
           />)}
         </div>
       </div>

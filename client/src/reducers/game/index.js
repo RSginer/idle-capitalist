@@ -50,7 +50,7 @@ function factoryBusinesses(businessesServerResult) {
     return businesses[business.businessKey] = {
       owner: true,
       level: business.level,
-      managers: business.managers
+      manager: business.manager
     }
   });
 

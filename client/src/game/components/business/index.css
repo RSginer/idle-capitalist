@@ -65,6 +65,13 @@
   font-size: 0.75em;
 }
 
+.business-managers .business-manager .manager-picture.manager-picture-hired {
+  background-image: url(https://www.miceli.works/images/profilepictures/1549738164_1.png);
+  background-color: white;
+  background-size: contain;
+  cursor: not-allowed;
+}
+
 .business-expand {
   width: 265px;
   height: 75px;
@@ -106,6 +113,7 @@
   font-size: 1.6em;
   margin-bottom: 20px;
 }
+
 .unlock-business-button {
   font-size: 1em;
   padding: 10px;
