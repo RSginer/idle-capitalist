@@ -18,10 +18,10 @@ export const Business = (props) => {
         <div className="business-level">{props.title} - level 1</div>
         <div className="business-control" onClick={props.onManageOrder(props.businessKey)} style={{ backgroundImage: `url("${props.picture}")` }}>
           {!props.processingOrder && <div className="business-control-label">
-  <span className="business-control-label-message">Click to manage order</span>
+            <span className="business-control-label-message">Click to manage order</span>
           </div>}
         </div>
-        <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="gray" strokeColor="yellowgreen" percent={2} />
+        <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="gray" strokeColor="yellowgreen" percent={props.orderProgress} />
         <div className="business-actions">
           <div className="business-managers">
             <p className="business-managers-label">Hire Managers! -></p>
@@ -31,7 +31,7 @@ export const Business = (props) => {
             </div>
             </div>)}
           </div>
-          <div className="timer">00:00:00</div>
+          <div className="timer">{props.timer}</div>
           <div className="business-expand">
             <button className="business-expand-btn">Expand $200</button>
           </div>

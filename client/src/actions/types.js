@@ -21,5 +21,8 @@ export const types = {
   // Manage Order
   MANAGE_ORDER: '[Business] Manage Order',
   MANAGE_ORDER_SUCCESS: '[Server] Manage Order Success',
-  MANAGE_ORDER_ERROR: '[Server] Manage Order Error'
+  MANAGE_ORDER_ERROR: '[Server] Manage Order Error',
+  MANAGE_ORDER_TICK: '[Timer] Manage Order Tick',
+  MANAGE_ORDER_FINISH: '[Timer] Manage Order Finish',
+
 }

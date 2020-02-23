@@ -30,6 +30,10 @@ export default (state = {
     // Orders
     case types.MANAGE_ORDER:
       return manageOrder(state, action);
+    case types.MANAGE_ORDER_TICK:
+      return manageOrderTick(state, action);
+    case types.MANAGE_ORDER_FINISH:
+      return {...state};
     case types.MANAGE_ORDER_SUCCESS:
       return state;
     default:
@@ -73,11 +77,26 @@ function manageOrder(state, action) {
   const business = newState.businesses[businessKey];
 
   business.processingOrder = true;
-  business.timer = newState.businessesConfig[businessKey].orderBaseTimer;
+  business.timer = newState.businessesConfig[businessKey].baseOrderTimerInMs;
 
-  newState.businesses[businessKey] = business;
+  newState.businesses[businessKey] = { ...business };
 
-  newState.businesses[businessKey] = { ...newState.businesses[businessKey] };
+  return {...newState, businesses: {...newState.businesses}};
+}
+
+function manageOrderTick(state, action) {
+  const newState = {...state};
+  const businessKey = action.payload;
+  const business = newState.businesses[businessKey];
+  if (business.timer > 0) {
+    business.processingOrder = true;
+    business.timer = business.timer - 100;
+  } else {
+    business.processingOrder = false;
+    business.timer = 0;
+  }
+
+  newState.businesses[businessKey] = {...business };
 
   return {...newState, businesses: {...newState.businesses}};
 }

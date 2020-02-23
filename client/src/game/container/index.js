@@ -20,6 +20,29 @@ export const Game = () => {
     dispatch(manageOrder(businessKey))
   }
 
+  const calcOrderProgress = (businessKey, ms) => {
+    const timeLeft = businessesConfig[businessKey].baseOrderTimerInMs - ms;
+    console.log(timeLeft * businessesConfig[businessKey].baseOrderTimerInMs / 100)
+    return timeLeft * businessesConfig[businessKey].baseOrderTimerInMs / 100;
+  }
+
+  const msToHMS = (ms) => {
+    if (!ms) {
+      return '00:00:00'
+    }
+
+    // 1- Convert to seconds:
+    var seconds = ms / 1000;
+    // 2- Extract hours:
+    var hours = parseInt(seconds / 3600); // 3,600 seconds in 1 hour
+    seconds = seconds % 3600; // seconds remaining after extracting hours
+    // 3- Extract minutes:
+    var minutes = parseInt(seconds / 60); // 60 seconds in 1 minute
+    // 4- Keep only seconds not extracted to minutes:
+    seconds = seconds % 60;
+    return hours + ":" + minutes + ":" + seconds;
+  }
+
   return (
     <div>
       <Cash amount={totalCashAmount} />
@@ -38,6 +61,8 @@ export const Game = () => {
             onBuyBusiness={onBuyBusiness}
             onManageOrder={onManageOrder}
             processingOrder={businesses[businessKey]?.processingOrder}
+            timer={msToHMS(businesses[businessKey]?.timer)}
+            orderProgress={calcOrderProgress(businessKey, businesses[businessKey]?.timer)}
           />)}
         </div>
       </div>
