@@ -23,10 +23,16 @@ function BusinessRepository() {
     return res;
   }
 
+
+  async function save(business) {
+    return await business.save();
+  }
+
   return {
     create,
     findByBusinessKey,
     find,
+    save
   }
 }
 

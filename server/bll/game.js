@@ -83,10 +83,40 @@ function GameBll() {
     }
   }
 
+  async function expandBusiness(businessKey) {
+    try {
+      const businessesConfig = config.get(`businesses`);
+      const currentGame = await gameRepository.findOne();
+      const business = await businessRepository.findByBusinessKey(businessKey);
+
+      const rateGrowth = businessesConfig[businessKey].coefficient;
+
+      // Fix initial cost for limonade
+      const costBase = businessesConfig[businessKey].initialCost || 4;
+      const owned = business.level;
+      const cost = Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
+
+      const totalCashAmount = parseFloat(currentGame.totalCashAmount) - cost;
+
+      currentGame.totalCashAmount = totalCashAmount;
+
+      await gameRepository.save(currentGame);
+
+      business.level +=1;
+
+      await businessRepository.save(business)
+
+      return business;
+    } catch(err) {
+      debug(err);
+    }
+  }
+
   return {
     initGame,
     buyBusiness,
-    manageOrder
+    manageOrder,
+    expandBusiness
   }
 }
 

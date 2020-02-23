@@ -6,7 +6,7 @@ const serverCommands = require('./types/server');
 const util = require('../util');
 const gameBll = require('../bll/game')();
 
-const debug = require('debug')('idle-capitalist-server:events');
+const debug = require('debug')('idle-capitalist-server:commands');
 
 function GameCommandsManager(ws) {
 
@@ -53,7 +53,17 @@ function GameCommandsManager(ws) {
 
   async function onExpandBusiness(businessKey) {
     debug(`Expanding business ${businessKey}...`);
-    ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_SUCCESS, businessKey));
+    try {
+      const expandBusinessResult = await gameBll.expandBusiness(businessKey);
+
+      if (expandBusinessResult) {
+        ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_SUCCESS, expandBusinessResult));
+        debug(`Expanded business ${businessKey}!`);
+      }
+    } catch (err) {
+      debug(err)
+      ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_ERROR, err));
+    }
   }
 
   // Public API

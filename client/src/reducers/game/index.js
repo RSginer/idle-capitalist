@@ -115,7 +115,7 @@ function manageOrderTick(state, action) {
 
 function expandBusiness(state, action) {
   const newState = { ...state };
-  const businessKey = action.payload;
+  const businessKey = action.payload.businessKey;
   const business = newState.businesses[businessKey];
 
   const rateGrowth = newState.businessesConfig[businessKey].coefficient;
@@ -128,7 +128,7 @@ function expandBusiness(state, action) {
 
   newState.totalCashAmount = Math.round((newState.totalCashAmount - cost) * 100) / 100;
 
-  business.level += 1;
+  business.level = action.payload.level;
 
   newState.businesses[businessKey] = { ...business };
 
