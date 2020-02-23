@@ -32,11 +32,8 @@ export default (state = {
       return manageOrder(state, action);
     case types.MANAGE_ORDER_TICK:
       return manageOrderTick(state, action);
-    case types.MANAGE_ORDER_FINISH:
-      // TODO: put this logic in backend 
-      return manageOrderFinish(state, action)
     case types.MANAGE_ORDER_SUCCESS:
-      return state;
+      return { ...state, totalCashAmount: action.payload }
     default:
       return state;
   }
@@ -105,24 +102,4 @@ function manageOrderTick(state, action) {
   newState.businesses[businessKey] = { ...business };
 
   return { ...newState, businesses: { ...newState.businesses } };
-}
-
-function manageOrderFinish(state, action) {
-  const newState = { ...state };
-  const businessKey = action.payload;
-  const business = newState.businesses[businessKey];
-
-  // calc revenue
-  const initialTime = newState.businessesConfig[businessKey].initialTime;
-  const initialProductivity = newState.businessesConfig[businessKey].initialProductivity;
-  let profit = (initialProductivity * business.level) * (initialTime / 1000);
-
-  if (business.managers && business.managers.length > 0) {
-    profit = profit * business.managers.length;
-  }
-
-  newState.totalCashAmount += profit;
-  newState.totalCashAmount = Math.round(newState.totalCashAmount * 100) / 100;
-
-  return { ...newState };
 }

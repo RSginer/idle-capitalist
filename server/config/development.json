@@ -59,7 +59,7 @@
     }
   },
   "initialGameState": {
-    "totalCashAmount": 100,
+    "totalCashAmount": 0,
     "businesses": []
   }
 }

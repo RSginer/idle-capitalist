@@ -13,6 +13,16 @@ function* buyBusinessSaga() {
 }
 
 // Manage Order
+
+function* manageOrder(action) {
+  yield put({ type: types.WS_MESSAGE, payload: serverActions.manageOrder(action.payload) });
+}
+
+function* manageOrderSaga() {
+  yield takeEvery(types.MANAGE_ORDER_FINISH, manageOrder);
+}
+
+
 export const getIsProcessing = (businessKey) => (state) => state.game.businesses[businessKey].processingOrder;
 
 export const getBusinessTimer = (businessKey) => (state) => state.game.businesses[businessKey].timer;
@@ -43,6 +53,7 @@ function* manageOrderTimer() {
 export default function* rootSaga() {
   yield all([
     buyBusinessSaga(),
-    manageOrderTimer()
+    manageOrderTimer(),
+    manageOrderSaga()
   ])
 }

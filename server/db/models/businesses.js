@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const BusinessSchema = mongoose.Schema({
   businessKey: String,
   level: Number,
-  managers: [Number]
+  manager: Boolean
 });
 
 module.exports = mongoose.model('Business', BusinessSchema);

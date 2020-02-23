@@ -5,11 +5,10 @@ const GameRepository = require('../repository/game');
 const BusinessRepository = require('../repository/business');
 
 const config = require('config');
+const gameRepository = GameRepository();
+const businessRepository = BusinessRepository();
 
 function GameBll() {
-
-  const gameRepository = GameRepository();
-  const businessRepository = BusinessRepository();
 
   async function initGame() {
     let currentGame;
@@ -26,26 +25,26 @@ function GameBll() {
 
     // TODO: get leave earning
 
-   return currentGame;
+    return currentGame;
   }
 
   async function buyBusiness(businessKey) {
     try {
       const businessesConfig = config.get(`businesses`);
       const currentGame = await gameRepository.findOne();
-  
+
       if (Object.keys(businessesConfig).includes(businessKey)) {
         let business = await businessRepository.findByBusinessKey(businessKey);
-  
+
         if (!business && currentGame.totalCashAmount >= businessesConfig[businessKey].initialCost) {
           currentGame.totalCashAmount -= businessesConfig[businessKey].initialCost;
-  
+
           business = await businessRepository.create({
             businessKey: businessKey,
             level: 1,
             managers: []
           })
-  
+
           currentGame.businesses.push(business.id);
           await gameRepository.save(currentGame);
 
@@ -63,9 +62,29 @@ function GameBll() {
 
   }
 
+  async function manageOrder(businessKey) {
+    try {
+      const businessesConfig = config.get(`businesses`);
+      const currentGame = await gameRepository.findOne();
+      const business = await businessRepository.findByBusinessKey(businessKey);
+      // calc revenue
+      const initialTime = businessesConfig[businessKey].initialTime;
+      const initialProductivity = businessesConfig[businessKey].initialProductivity;
+      let profit = (initialProductivity * business.level) * (initialTime / 1000);
+      let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
+      currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
+      await gameRepository.save(currentGame);
+
+      return currentGame.totalCashAmount;
+    } catch (err) {
+      debug(err);
+    }
+  }
+
   return {
     initGame,
-    buyBusiness
+    buyBusiness,
+    manageOrder
   }
 }
 

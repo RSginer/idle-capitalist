@@ -14,19 +14,40 @@ function GameCommandsManager(ws) {
 
   // Listen Events
   eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
+  eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder)
 
 
   // Methods
-  async function onBuyBusiness(businessType) {
+  async function onBuyBusiness(businessKey) {
+    debug(`Buying business ${businessKey}...`);
     try {
-      const buyBusinessResult = await gameBll.buyBusiness(businessType)
+      const buyBusinessResult = await gameBll.buyBusiness(businessKey)
 
       if (buyBusinessResult) {
         ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_SUCCESS, buyBusinessResult));
+        debug(`Buy business success for ${businessKey}!`);
+
       }
 
-      } catch (err) {
+    } catch (err) {
+      debug(err)
       ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_ERROR, err));
+    }
+  }
+
+  async function onManageOrder(businessKey) {
+    debug(`Managing order for ${businessKey}...`);
+    try {
+      const manageOrderResult = await gameBll.manageOrder(businessKey)
+
+      if (manageOrderResult) {
+        ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_SUCCESS, manageOrderResult));
+        debug(`Managed order success for ${businessKey}!`);
+      }
+
+    } catch (err) {
+      debug(err)
+      ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_ERROR, err));
     }
   }
 
