@@ -31,8 +31,8 @@ export const Game = () => {
     }
 
     const timeLeft = businessesConfig[businessKey].initialTime - ms;
-
-    return timeLeft * 100 / businessesConfig[businessKey].initialTime;
+    const percent = timeLeft * 100 / businessesConfig[businessKey].initialTime
+    return percent;
   }
 
   const msToHMS = (ms) => {
@@ -43,7 +43,7 @@ export const Game = () => {
     let secNum = ms / 1000;
     let hours = Math.floor(secNum / 3600);
     let minutes = Math.floor((secNum - (hours * 3600)) / 60);
-    let seconds = Math.ceil(secNum - (hours * 3600) - (minutes * 60));
+    let seconds = secNum - (hours * 3600) - (minutes * 60);
 
     if (hours < 10) { hours = "0" + hours; }
     if (minutes < 10) { minutes = "0" + minutes; }
@@ -93,7 +93,7 @@ export const Game = () => {
             onBuyBusiness={onBuyBusiness}
             onManageOrder={onManageOrder}
             processingOrder={businesses[businessKey]?.processingOrder}
-            timer={msToHMS(businesses[businessKey]?.timer)}
+            timer={msToHMS(businesses[businessKey]?.timer, true)}
             orderProgress={calcOrderProgress(businessKey, businesses[businessKey]?.timer)}
             costNextExpand={calcNextExpandCost(businessKey)}
             manager={businesses[businessKey]?.manager}
