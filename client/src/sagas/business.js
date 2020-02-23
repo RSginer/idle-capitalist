@@ -25,7 +25,6 @@ function manageOrderDelay(businessKey) {
     while (isProcessing) {
       yield put({ type: types.MANAGE_ORDER_TICK, payload: businessKey });
       isProcessing = yield select(getIsProcessing(businessKey));
-      console.log('Processing order...')
       yield call(delay, 100);
     }
 
