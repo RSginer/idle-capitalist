@@ -16,6 +16,7 @@ function GameCommandsManager(ws) {
   eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
   eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder)
   eventEmitter.on(serverCommands.EXPAND_BUSINESS, onExpandBusiness)
+  eventEmitter.on(serverCommands.HIRE_MANAGER, onHireManager);
 
   // Methods
   async function onBuyBusiness(businessKey) {
@@ -64,6 +65,22 @@ function GameCommandsManager(ws) {
       debug(`Expanded business error ${businessKey}!`, err);
       ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_ERROR, err));
     }
+  }
+
+  async function onHireManager(businessKey) {
+    debug(`Hiring manager for business ${businessKey}...`);
+    try {
+      const hireManagerResult = await gameBll.hireManager(businessKey);
+
+      if (hireManagerResult) {
+        ws.send(util.clientCommand(clientCommands.HIRE_MANAGER_SUCCESS, hireManagerResult));
+        debug(`Hired manager for business ${businessKey}!`);
+      }
+    } catch (err) {
+      debug(`Hire manager error for business ${businessKey}`, err);
+      ws.send(util.clientCommand(clientCommands.HIRE_MANAGER_ERROR, err));
+    }
+
   }
 
   // Public API

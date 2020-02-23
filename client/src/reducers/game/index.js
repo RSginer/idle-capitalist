@@ -27,6 +27,10 @@ export default (state = {
       return { ...state, loading: false, error: action.payload };
     case types.INIT_GAME:
       return { ...state, loading: true, error: null };
+    
+    // Hire Manager
+    case types.HIRE_MANAGER_SUCCESS:
+      return hireManager(state, action);
 
     // Buy Business
     case types.BUY_BUSINESS_SUCCESS:
@@ -66,8 +70,8 @@ function buyBusiness(state, action) {
   const businessPrice = state.businessesConfig[action.payload.businessKey].initialCost;
   const newState = { ...state };
 
-  if (state.totalCashAmount >= businessPrice) {
-    newState.totalCashAmount -= businessPrice;
+  if (newState.totalCashAmount >= businessPrice) {
+    newState.totalCashAmount = Math.round((newState.totalCashAmount - businessPrice) * 100) / 100;
     newState.businesses[action.payload.businessKey] = {
       owner: true,
       level: action.payload.level,
@@ -129,6 +133,22 @@ function expandBusiness(state, action) {
   newState.totalCashAmount = Math.round((newState.totalCashAmount - cost) * 100) / 100;
 
   business.level = action.payload.level;
+
+  newState.businesses[businessKey] = { ...business };
+
+  return { ...newState, businesses: { ...newState.businesses } };
+}
+
+function hireManager(state, action) {
+  const newState = { ...state };
+  const businessKey = action.payload.businessKey;
+  const business = newState.businesses[businessKey];
+
+  business.manager = true;
+
+  const cost = newState.businessesConfig[businessKey].managerPrice;
+
+  newState.totalCashAmount = Math.round((newState.totalCashAmount - cost) * 100) / 100;
 
   newState.businesses[businessKey] = { ...business };
 

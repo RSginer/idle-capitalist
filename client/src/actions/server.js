@@ -20,3 +20,10 @@ export function expandBusiness(payload) {
     message: payload
   }
 }
+
+export function hireManager(payload) {
+  return {
+    command: serverComands.HIRE_MANAGER,
+    message: payload
+  }
+}

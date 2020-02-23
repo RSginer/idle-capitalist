@@ -29,4 +29,9 @@ export const types = {
   EXPAND_BUSINESS: '[Business] Expand',
   EXPAND_BUSINESS_SUCCESS: '[Server] Expand Success',
   EXPAND_BUSINESS_ERROR: '[Server] Expand Error',
+
+  // Hire Manager
+  HIRE_MANAGER: '[Business] Hire Manager',
+  HIRE_MANAGER_SUCCESS: '[Server] Hire Manager Success',
+  HIRE_MANAGER_ERROR: '[Server] Hire Manager Success'
 }

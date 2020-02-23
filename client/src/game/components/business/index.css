@@ -70,6 +70,14 @@
   align-items: center;
   justify-content: center;
   font-size: 0.75em;
+  background-color: transparent;
+}
+
+.business-managers .business-manager .manager-picture:disabled {
+  background-color: gray;
+  color: #1d1d1d;
+  cursor: not-allowed;
+  border-color: darkgray;
 }
 
 .business-managers .business-manager .manager-picture.manager-picture-hired {

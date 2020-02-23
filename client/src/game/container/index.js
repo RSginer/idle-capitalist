@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyBusiness, manageOrder, reconnectSocket, expandBusiness } from '../../actions';
+import { buyBusiness, manageOrder, reconnectSocket, expandBusiness, hireManager } from '../../actions';
 
 import { wsConnect } from '../../actions/websocket';
 import config from '../../config';
@@ -18,15 +18,19 @@ export const Game = () => {
   const socketConnected = useSelector((state) => state.game.socketConnected);
 
   const onBuyBusiness = (businessKey) => () => {
-    dispatch(buyBusiness(businessKey))
+    dispatch(buyBusiness(businessKey));
   }
 
   const onManageOrder = (businessKey) => () => {
-    dispatch(manageOrder(businessKey))
+    dispatch(manageOrder(businessKey));
   }
 
   const onExpandBusiness = (businessKey) => () => {
     dispatch(expandBusiness(businessKey));
+  }
+
+  const onHireManager = (businessKey) => () => {
+    dispatch(hireManager(businessKey));
   }
 
   const calcOrderProgress = (businessKey, ms) => {
@@ -41,7 +45,7 @@ export const Game = () => {
 
   const msToHMS = (ms) => {
     if (!ms || ms <= 0) {
-      return '00:00:00'
+      return '00:00:00';
     }
 
     let secNum = ms / 1000;
@@ -89,7 +93,7 @@ export const Game = () => {
             businessKey={businessKey}
             title={businessesConfig[businessKey].title}
             type={businessKey}
-            managersBasePrice={businessesConfig[businessKey].managersBasePrice}
+            managerPrice={businessesConfig[businessKey].managerPrice}
             price={businessesConfig[businessKey].initialCost}
             owner={businesses[businessKey]?.owner}
             totalCashAmount={totalCashAmount}
@@ -105,6 +109,7 @@ export const Game = () => {
             revenue={getRevenue(businessKey)}
             onExpandBusiness={onExpandBusiness}
             level={businesses[businessKey] ? businesses[businessKey]?.level : 1}
+            onHireManager={onHireManager}
           />)}
         </div>
       </div>

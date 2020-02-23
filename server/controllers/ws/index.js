@@ -22,6 +22,7 @@ function GameWebsocketController(ws) {
           parsedMessage.command = 'undefined';
         }
         ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command));
+        debug(`Invalid command ${parsedMessage.command} with payload ${parsedMessage.payload}`)
       }
     } catch(err) {
       debug(err);

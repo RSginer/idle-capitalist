@@ -12,13 +12,34 @@ function* buyBusinessSaga() {
   yield takeEvery(types.BUY_BUSINESS, buyBussiness);
 }
 
+// Expand Business
 function* expandBusiness(action) {
-  yield put({ type: types.WS_MESSAGE, payload: serverActions.expandBusiness(action.payload)})
+  yield put({ type: types.WS_MESSAGE, payload: serverActions.expandBusiness(action.payload) })
 }
 
-// Expand Business
 function* expandBusinessSaga() {
   yield takeEvery(types.EXPAND_BUSINESS, expandBusiness)
+}
+
+// Hire Manager
+function* hireManager(action) {
+  yield put({ type: types.WS_MESSAGE, payload: serverActions.hireManager(action.payload) });
+}
+
+function* hireManagerSaga() {
+  yield takeEvery(types.HIRE_MANAGER, hireManager)
+}
+
+function* hireManagerSuccess(action) {
+  const business = action.payload;
+
+  if (business && business.manager === true) {
+    yield put({ type: types.MANAGE_ORDER, payload: business.businessKey })
+  }
+}
+
+function* hireManagerSuccessSaga() {
+  yield takeEvery(types.HIRE_MANAGER_SUCCESS, hireManagerSuccess)
 }
 
 // Manage Order
@@ -33,7 +54,6 @@ function* manageOrder(action) {
       yield put({ type: types.MANAGE_ORDER, payload: keys[index] })
     }
   }
-
 }
 
 function* manageOrderSaga() {
@@ -72,6 +92,8 @@ export default function* rootSaga() {
     buyBusinessSaga(),
     manageOrderTimer(),
     manageOrderSaga(),
-    expandBusinessSaga()
+    expandBusinessSaga(),
+    hireManagerSaga(),
+    hireManagerSuccessSaga()
   ])
 }

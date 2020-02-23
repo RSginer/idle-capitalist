@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('idle-capitalist-server:http');
+const debug = require('debug')('idle-capitalist-server:interface');
 const session = require('express-session');
 const express = require('express');
 const http = require('http');

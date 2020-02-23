@@ -28,3 +28,9 @@ export function expandBusiness(businessKey) {
   }
 }
 
+export function hireManager(businessKey){
+  return {
+    type: types.HIRE_MANAGER,
+    payload: businessKey
+  }
+}
