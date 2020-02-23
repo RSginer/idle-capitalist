@@ -98,13 +98,17 @@ function GameBll() {
 
       const totalCashAmount = parseFloat(currentGame.totalCashAmount) - cost;
 
-      currentGame.totalCashAmount = totalCashAmount;
+      if (totalCashAmount >= 0) {
+        currentGame.totalCashAmount = totalCashAmount;
 
-      await gameRepository.save(currentGame);
-
-      business.level +=1;
-
-      await businessRepository.save(business)
+        await gameRepository.save(currentGame);
+  
+        business.level +=1;
+  
+        await businessRepository.save(business)
+      } else {
+        throw new Error(`You don't have money to buy this`)
+      }
 
       return business;
     } catch(err) {
