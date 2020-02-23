@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrencyFormat from "react-currency-format";
 
-import { buyBusiness, manageOrder, reconnectSocket, expandBusiness, hireManager, closeIdleDialog } from '../../actions';
+import { buyBusiness, manageOrder, expandBusiness, hireManager, closeIdleDialog } from '../../actions';
 
 import { wsConnect } from '../../actions/websocket';
 import config from '../../config';
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
 import { Dialog } from '../components/dialog';
+import util from '../../util';
 
 import "./index.css";
 
@@ -82,20 +82,17 @@ export const Game = () => {
 
   const calcNextExpandCost = (businessKey) => {
     const rateGrowth = businessesConfig[businessKey].coefficient;
+    const costBase = businessesConfig[businessKey].initialCost;
+    const businessLevel = businesses[businessKey] && businesses[businessKey].level ? businesses[businessKey].level : 1;
 
-    // Fix initial cost for limonade
-    const costBase = businessesConfig[businessKey].initialCost || 4;
-    const owned = businesses[businessKey] && businesses[businessKey].level ? businesses[businessKey].level : 1;
-
-    return Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
+    return util.getNextExpandCost(costBase, businessLevel, rateGrowth);
   }
 
   const getRevenue = (businessKey) => {
     const level = (businesses[businessKey] ? businesses[businessKey].level : 1);
     const initialTime = businessesConfig[businessKey].initialTime;
     const initialProductivity = businessesConfig[businessKey].initialProductivity;
-    let profit = (initialProductivity * level) * (initialTime / 1000);
-    return Math.round(profit * 100) / 100;
+    return util.getBusinessRevenue(initialProductivity, level, initialTime);
   }
 
   const onIdleDialogClose = () => {

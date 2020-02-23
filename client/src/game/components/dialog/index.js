@@ -1,5 +1,4 @@
 import React from 'react';
-import CurrencyFormat from "react-currency-format";
 import "./index.css";
 
 export const Dialog = (props) => {

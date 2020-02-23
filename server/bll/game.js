@@ -3,6 +3,7 @@
 const debug = require('debug')('idle-capitalist-server:bll');
 const GameRepository = require('../repository/game');
 const BusinessRepository = require('../repository/business');
+const util = require('../util')
 
 const config = require('config');
 const gameRepository = GameRepository();
@@ -33,9 +34,8 @@ function GameBll() {
       businesses && businesses.length > 0 && businesses.map((business) => {
         if (business.manager === true) {
           hasManagers = true;
-          // Calc revenue
           const initialProductivity = businessesConfig[business.businessKey].initialProductivity;
-          revenue = (initialProductivity * business.level) * (time / 1000);
+          revenue = util.getBusinessRevenue(initialProductivity, business.level, time);
         }
       })
 
@@ -94,7 +94,7 @@ function GameBll() {
     // Calc revenue
     const initialTime = businessesConfig[businessKey].initialTime;
     const initialProductivity = businessesConfig[businessKey].initialProductivity;
-    let profit = (initialProductivity * business.level) * (initialTime / 1000);
+    let profit = util.getBusinessRevenue(initialProductivity, business.level, initialTime)
     let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
 
     currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
@@ -106,15 +106,10 @@ function GameBll() {
   async function expandBusiness(businessKey) {
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
-    const business = await businessRepository.findByBusinessKey(businessKey);
-
+    let business = await businessRepository.findByBusinessKey(businessKey);
     const rateGrowth = businessesConfig[businessKey].coefficient;
-
-    // Fix initial cost for limonade
-    const costBase = businessesConfig[businessKey].initialCost || 4;
-    const owned = business.level;
-    const cost = Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
-
+    const costBase = businessesConfig[businessKey].initialCost;
+    const cost = util.getNextExpandCost(costBase, business.level, rateGrowth);
     const totalCashAmount = Math.round(parseFloat((currentGame.totalCashAmount) - cost) * 100) / 100;
 
     if (totalCashAmount >= 0) {

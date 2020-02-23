@@ -1,4 +1,5 @@
 import { types } from '../../actions/types';
+import util from '../../util';
 
 export default (state = {
   showIdleDialog: false,
@@ -129,19 +130,13 @@ function expandBusiness(state, action) {
   const newState = { ...state };
   const businessKey = action.payload.businessKey;
   const business = newState.businesses[businessKey];
-
   const rateGrowth = newState.businessesConfig[businessKey].coefficient;
-
-  // Fix initial cost for limonade
-  const costBase = newState.businessesConfig[businessKey].initialCost || 4;
-  const owned = newState.businesses[businessKey] && business.level ? business.level : 1;
-
-  const cost = Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
-
+  const costBase = newState.businessesConfig[businessKey].initialCost;
+  const businessLevel = newState.businesses[businessKey] && business.level ? business.level : 1;
+  const cost = util.getNextExpandCost(costBase, businessLevel, rateGrowth);
+  
   newState.totalCashAmount = Math.round((newState.totalCashAmount - cost) * 100) / 100;
-
   business.level = action.payload.level;
-
   newState.businesses[businessKey] = { ...business };
 
   return { ...newState, businesses: { ...newState.businesses } };

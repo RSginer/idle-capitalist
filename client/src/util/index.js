@@ -1,9 +1,3 @@
-'use strict';
-
-function clientCommand(command, payload) {
-  return `{"type": "${command}", "payload": ${JSON.stringify(payload)}}`;
-}
-
 // Maths
 function getBusinessRevenue(initialProductivity, businessLevel, ms) {
   const revenue = (initialProductivity * businessLevel) * (ms / 1000);
@@ -18,9 +12,7 @@ function getNextExpandCost(initialCost, businessLevel, rateGrowth) {
   return cost;
 }
 
-module.exports = {
-  clientCommand,
+export default {
   getBusinessRevenue,
   getNextExpandCost
 }
-
