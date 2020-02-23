@@ -116,15 +116,14 @@ function manageOrderFinish(state, action) {
   const initialRevenue = newState.businessesConfig[businessKey].initialRevenue;
   const initialProductivity = newState.businessesConfig[businessKey].initialProductivity;
   
-  let profit = (initialProductivity * business.level) * initialRevenue;
+  let profit = (initialProductivity * business.level);
 
-  console.log(profit)
-
-  /* if (business.managers && business.managers.length > 0) {
+   if (business.managers && business.managers.length > 0) {
     profit = profit * business.managers.length;
-  } */
+  } 
 
   newState.totalCashAmount += profit;
+  newState.totalCashAmount = Math.round(newState.totalCashAmount * 100) / 100;
 
   return {...newState};
 }
