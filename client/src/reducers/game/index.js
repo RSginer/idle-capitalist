@@ -63,6 +63,7 @@ function buyBusiness(state, action) {
     newState.totalCashAmount -= businessPrice;
     newState.businesses[action.payload.businessKey] = {
       owner: true,
+      level: action.payload.level,
       managers: []
     }
 
@@ -109,11 +110,21 @@ function manageOrderFinish(state, action) {
   const newState = {...state};
   const businessKey = action.payload;
   const business = newState.businesses[businessKey];
-  let profit = newState.businessesConfig[businessKey].initialRevenue;
 
-  if (business.managers && business.managers.length > 0) {
+  console.log(business)
+  
+
+  // calc revenue
+  const initialRevenue = newState.businessesConfig[businessKey].initialRevenue;
+  const initialProductivity = newState.businessesConfig[businessKey].initialProductivity;
+  
+  let profit = (initialProductivity * business.level) * initialRevenue;
+
+  console.log(profit)
+
+  /* if (business.managers && business.managers.length > 0) {
     profit = profit * business.managers.length;
-  }
+  } */
 
   newState.totalCashAmount += profit;
 
