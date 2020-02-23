@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyBusiness, manageOrder } from '../../actions';
+import { buyBusiness, manageOrder, reconnectSocket } from '../../actions';
+
+import { wsConnect } from '../../actions/websocket';
+import config from '../../config';
 import { Cash } from '../components/cash';
 import { Business } from '../components/business';
+import { Dialog } from '../components/dialog';
 
 import "./index.css";
 
@@ -11,6 +15,7 @@ export const Game = () => {
   const businesses = useSelector((state) => state.game.businesses);
   const businessesConfig = useSelector((state) => state.game.businessesConfig);
   const dispatch = useDispatch();
+  const socketConnected = useSelector((state) => state.game.socketConnected);
 
   const onBuyBusiness = (businessKey) => () => {
     dispatch(buyBusiness(businessKey))
@@ -26,7 +31,7 @@ export const Game = () => {
     }
 
     const timeLeft = businessesConfig[businessKey].initialTime - ms;
-    
+
     return timeLeft * 100 / businessesConfig[businessKey].initialTime;
   }
 
@@ -57,9 +62,14 @@ export const Game = () => {
     return Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
   }
 
+  const onSocketDisconnected = () => {
+    dispatch(wsConnect(config.websocketUrl))
+  }
+
   return (
     <div>
       <Cash amount={totalCashAmount} />
+      <Dialog opened={!socketConnected} content="You lost the connection with the server, try to reconnect clicking the button bellow" title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
       <div className="game-businesses-container">
         <div className="game-businesses-list">
           {Object.keys(businessesConfig).map((businessKey) => <Business

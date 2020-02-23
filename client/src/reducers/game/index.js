@@ -1,6 +1,7 @@
 import { types } from '../../actions/types';
 
 export default (state = {
+  socketConnected: true,
   loading: false,
   error: null,
   totalCashAmount: 0,
@@ -8,7 +9,10 @@ export default (state = {
   businessesConfig: {}
 }, action) => {
   switch (action.type) {
-
+    case types.WS_DISCONNECTED:
+      return {...state, socketConnected: false};
+    case types.WS_CONNECTED:
+      return {...state, socketConnected: true}
     // Init Game
     case types.INIT_GAME_SUCCESS:
       return {

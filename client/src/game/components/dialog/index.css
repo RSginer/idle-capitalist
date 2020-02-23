@@ -1,0 +1,35 @@
+.dialog-container {
+  position: absolute;
+  z-index: 9999;
+  background: #EEE;
+  width: 820px;
+  height: 625px;
+  top: 90px;
+}
+
+.dialog-header, .dialog-actions {
+  width: 100%;
+  background: #ccc;
+  text-align: center;
+}
+
+.dialog-header .header-title, .dialog-actions .actions {
+  padding: 10px;
+  display: block;
+}
+
+.dialog-body {
+  display: flex;
+  height: 530px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-actions .actions .button {
+  font-size: 1.5em;
+  padding: 2px 30px;
+  background-color: yellowgreen;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
