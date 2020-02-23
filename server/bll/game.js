@@ -12,16 +12,40 @@ function GameBll() {
 
   async function initGame() {
     let currentGame;
+    let isNewGame = false;
+    let revenue = 0;
+    let time = 0;
 
     currentGame = await gameRepository.findOne();
 
     if (!currentGame) {
+      isNewGame = true;
       currentGame = gameRepository.create(config.get('initialGameState'))
     }
 
-    // TODO: get leave earning
+    if (!isNewGame) {
+      time = Date.now() - currentGame.lastConnectionClosedDateInMs;
+      const businessesConfig = config.get(`businesses`);
+      const businesses = await businessRepository.find();
+      revenue = 0;
+  
+      businesses && businesses.length > 0 && businesses.map((business) => {
+        if (business.manager === true) {
+          // Calc revenue
+          const initialProductivity = businessesConfig[business.businessKey].initialProductivity;
+          revenue = (initialProductivity * business.level) * (time / 1000);
+        }
+      })
+    }
 
-    return currentGame;
+    const result = {
+      currentGame,
+      isNewGame,
+      idleRevenue: revenue,
+      idleTime: time
+    }
+
+    return result;
   }
 
   async function buyBusiness(businessKey) {
@@ -119,7 +143,14 @@ function GameBll() {
     } else {
       throw new Error(`You don't have money to buy this`)
     }
+  }
 
+  // Connection close
+  async function updateLastConnectionTime(ms) {
+    const currentGame = await gameRepository.findOne();
+    currentGame.lastConnectionClosedDateInMs = ms;
+
+    await gameRepository.save(currentGame);
   }
 
   return {
@@ -127,7 +158,8 @@ function GameBll() {
     buyBusiness,
     manageOrder,
     expandBusiness,
-    hireManager
+    hireManager,
+    updateLastConnectionTime
   }
 }
 

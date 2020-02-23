@@ -17,6 +17,7 @@ function GameCommandsManager(ws) {
   eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder)
   eventEmitter.on(serverCommands.EXPAND_BUSINESS, onExpandBusiness)
   eventEmitter.on(serverCommands.HIRE_MANAGER, onHireManager);
+  eventEmitter.on(serverCommands.CONNECTION_CLOSED, onConnectionClosed);
 
   // Methods
   async function onBuyBusiness(businessKey) {
@@ -80,7 +81,15 @@ function GameCommandsManager(ws) {
       debug(`Hire manager error for business ${businessKey}`, err);
       ws.send(util.clientCommand(clientCommands.HIRE_MANAGER_ERROR, err));
     }
+  }
 
+  async function onConnectionClosed() {
+    debug(`Client disconnected, updating last connection time...`);
+    try {
+      await gameBll.updateLastConnectionTime(Date.now())
+    } catch (err) {
+      debug('Updating last connection time error!', err);
+    }
   }
 
   // Public API

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyBusiness, manageOrder, reconnectSocket, expandBusiness, hireManager } from '../../actions';
+import CurrencyFormat from "react-currency-format";
+
+import { buyBusiness, manageOrder, reconnectSocket, expandBusiness, hireManager, closeIdleDialog } from '../../actions';
 
 import { wsConnect } from '../../actions/websocket';
 import config from '../../config';
@@ -12,6 +14,9 @@ import "./index.css";
 
 export const Game = () => {
   const totalCashAmount = useSelector((state) => state.game.totalCashAmount);
+  const showIdleDialog = useSelector((state) => state.game.showIdleDialog);
+  const idleTime = useSelector((state) => state.game.idleTime);
+  const idleRevenue = useSelector((state) => state.game.idleRevenue);
   const businesses = useSelector((state) => state.game.businesses);
   const businessesConfig = useSelector((state) => state.game.businessesConfig);
   const dispatch = useDispatch();
@@ -60,6 +65,21 @@ export const Game = () => {
     return hours + ':' + minutes + ':' + seconds;
   }
 
+  const msToDHMS = (ms) => {
+    let days, hours, minutes, seconds, totalHours, totalMinutes, totalSeconds;
+
+    totalSeconds = parseInt(Math.floor(ms / 1000));
+    totalMinutes = parseInt(Math.floor(totalSeconds / 60));
+    totalHours = parseInt(Math.floor(totalMinutes / 60));
+    days = parseInt(Math.floor(totalHours / 24));
+
+    seconds = parseInt(totalSeconds % 60);
+    minutes = parseInt(totalMinutes % 60);
+    hours = parseInt(totalHours % 24);
+
+    return { d: days, h: hours, m: minutes, s: seconds };
+  }
+
   const calcNextExpandCost = (businessKey) => {
     const rateGrowth = businessesConfig[businessKey].coefficient;
 
@@ -78,6 +98,10 @@ export const Game = () => {
     return Math.round(profit * 100) / 100;
   }
 
+  const onIdleDialogClose = () => {
+    dispatch(closeIdleDialog())
+  }
+
   const onSocketDisconnected = () => {
     dispatch(wsConnect(config.websocketUrl))
   }
@@ -85,7 +109,10 @@ export const Game = () => {
   return (
     <div>
       <Cash amount={totalCashAmount} />
-      <Dialog opened={!socketConnected} content="You lost the connection with the server, try to reconnect clicking the button bellow" title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
+      <Dialog opened={showIdleDialog} content={`You were offline for ${msToDHMS(idleTime).d} days ${msToDHMS(idleTime).h} hours ${msToDHMS(idleTime).m} minutes ${msToDHMS(idleTime).s} seconds, and your businesses generated $${idleRevenue} for you`}
+       title="Welcome back!" actionText="Ok, thanks" onActionClick={() => onIdleDialogClose()} />
+      <Dialog opened={!socketConnected} content="" title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
+
       <div className="game-businesses-container">
         <div className="game-businesses-list">
           {Object.keys(businessesConfig).map((businessKey) => <Business

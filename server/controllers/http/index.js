@@ -9,11 +9,14 @@ function GameHttpController() {
 
   async function initGame(req, res) {
     try {
-      const currentGame = await gameBll.initGame();
+      const initGameResult = await gameBll.initGame();
       const businessesConfig = config.get('businesses');
       const response = {
-        gameState: currentGame,
-        businessesConfig
+        gameState: initGameResult.currentGame,
+        businessesConfig,
+        showIdleDialog: !initGameResult.isNewGame,
+        idleRevenue: initGameResult.idleRevenue,
+        idleTime: initGameResult.idleTime
       }
       debug('GameHttpController.initGame', response);
       return res.json(response);

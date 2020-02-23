@@ -1,6 +1,7 @@
 import { types } from '../../actions/types';
 
 export default (state = {
+  showIdleDialog: false,
   socketConnected: true,
   loading: false,
   error: null,
@@ -21,7 +22,10 @@ export default (state = {
         error: null,
         totalCashAmount: parseInt(action.payload.gameState.totalCashAmount),
         businesses: factoryBusinesses(action.payload.gameState.businesses),
-        businessesConfig: action.payload.businessesConfig
+        businessesConfig: action.payload.businessesConfig,
+        showIdleDialog: action.payload.showIdleDialog,
+        idleTime: action.payload.idleTime,
+        idleRevenue: action.payload.idleRevenue
       };
     case types.INIT_GAME_ERROR:
       return { ...state, loading: false, error: action.payload };
@@ -47,6 +51,10 @@ export default (state = {
       return manageOrderTick(state, action);
     case types.MANAGE_ORDER_SUCCESS:
       return { ...state, totalCashAmount: action.payload }
+    
+    // Others
+    case types.CLOSE_IDLE_DIALOG:
+      return {...state, showIdleDialog: false, idleTime: 0, idleRevenue: 0}
     default:
       return state;
   }

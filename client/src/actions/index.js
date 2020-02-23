@@ -34,3 +34,10 @@ export function hireManager(businessKey){
     payload: businessKey
   }
 }
+
+export function closeIdleDialog() {
+  return {
+    type: types.CLOSE_IDLE_DIALOG,
+    payload: null
+  }
+}

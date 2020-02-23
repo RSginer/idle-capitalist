@@ -33,5 +33,8 @@ export const types = {
   // Hire Manager
   HIRE_MANAGER: '[Business] Hire Manager',
   HIRE_MANAGER_SUCCESS: '[Server] Hire Manager Success',
-  HIRE_MANAGER_ERROR: '[Server] Hire Manager Success'
+  HIRE_MANAGER_ERROR: '[Server] Hire Manager Success',
+
+  // Others
+  CLOSE_IDLE_DIALOG: '[Dialog] Close Idle Dialog'
 }

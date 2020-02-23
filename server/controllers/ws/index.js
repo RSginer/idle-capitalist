@@ -31,7 +31,7 @@ function GameWebsocketController(ws) {
   }
 
   function close() {
-    // update last game date
+    gameCommandsManager.execCommand(serverCommands.CONNECTION_CLOSED)
   }
   return {
     onMessage,

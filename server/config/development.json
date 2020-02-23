@@ -60,6 +60,7 @@
   },
   "initialGameState": {
     "totalCashAmount": 0,
-    "businesses": []
+    "businesses": [],
+    "lastConnectionClosedDateInMs": 0
   }
 }
