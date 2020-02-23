@@ -25,4 +25,8 @@ export const types = {
   MANAGE_ORDER_TICK: '[Timer] Manage Order Tick',
   MANAGE_ORDER_FINISH: '[Timer] Manage Order Finish',
 
+  // Expand Business
+  EXPAND_BUSINESS: '[Business] Expand',
+  EXPAND_BUSINESS_SUCCESS: '[Server] Expand Success',
+  EXPAND_BUSINESS_ERROR: '[Server] Expand Error',
 }

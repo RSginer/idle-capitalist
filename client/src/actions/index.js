@@ -20,3 +20,11 @@ export function manageOrder(businessKey) {
     payload: businessKey
   }
 }
+
+export function expandBusiness(businessKey) {
+  return {
+    type: types.EXPAND_BUSINESS,
+    payload: businessKey
+  }
+}
+

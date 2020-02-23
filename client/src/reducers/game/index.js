@@ -13,6 +13,7 @@ export default (state = {
       return {...state, socketConnected: false};
     case types.WS_CONNECTED:
       return {...state, socketConnected: true}
+
     // Init Game
     case types.INIT_GAME_SUCCESS:
       return {
@@ -30,6 +31,10 @@ export default (state = {
     // Buy Business
     case types.BUY_BUSINESS_SUCCESS:
       return buyBusiness(state, action);
+    
+    // Expand Business
+    case types.EXPAND_BUSINESS_SUCCESS:
+      return expandBusiness(state, action)
 
     // Orders
     case types.MANAGE_ORDER:
@@ -102,6 +107,28 @@ function manageOrderTick(state, action) {
     business.processingOrder = true;
     business.timer = newState.businessesConfig[businessKey].initialTime;
   }
+
+  newState.businesses[businessKey] = { ...business };
+
+  return { ...newState, businesses: { ...newState.businesses } };
+}
+
+function expandBusiness(state, action) {
+  const newState = { ...state };
+  const businessKey = action.payload;
+  const business = newState.businesses[businessKey];
+
+  const rateGrowth = newState.businessesConfig[businessKey].coefficient;
+
+  // Fix initial cost for limonade
+  const costBase = newState.businessesConfig[businessKey].initialCost || 4;
+  const owned = newState.businesses[businessKey] && business.level ? business.level : 1;
+
+  const cost = Math.round(costBase * Math.pow(rateGrowth, owned) * 100) / 100;
+
+  newState.totalCashAmount = Math.round((newState.totalCashAmount - cost) * 100) / 100;
+
+  business.level += 1;
 
   newState.businesses[businessKey] = { ...business };
 

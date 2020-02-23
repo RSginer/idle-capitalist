@@ -15,7 +15,7 @@ function GameCommandsManager(ws) {
   // Listen Events
   eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
   eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder)
-
+  eventEmitter.on(serverCommands.EXPAND_BUSINESS, onExpandBusiness)
 
   // Methods
   async function onBuyBusiness(businessKey) {
@@ -49,6 +49,11 @@ function GameCommandsManager(ws) {
       debug(err)
       ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_ERROR, err));
     }
+  }
+
+  async function onExpandBusiness(businessKey) {
+    debug(`Expanding business ${businessKey}...`);
+    ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_SUCCESS, businessKey));
   }
 
   // Public API

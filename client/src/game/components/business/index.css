@@ -131,7 +131,7 @@
   color: white;
 }
 
-.unlock-business-button:disabled {
+.unlock-business-button:disabled, .business-expand-btn:disabled {
   background-color: gray;
   cursor: not-allowed;
 }

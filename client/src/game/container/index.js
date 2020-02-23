@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { buyBusiness, manageOrder, reconnectSocket } from '../../actions';
+import { buyBusiness, manageOrder, reconnectSocket, expandBusiness } from '../../actions';
 
 import { wsConnect } from '../../actions/websocket';
 import config from '../../config';
@@ -23,6 +23,10 @@ export const Game = () => {
 
   const onManageOrder = (businessKey) => () => {
     dispatch(manageOrder(businessKey))
+  }
+
+  const onExpandBusiness = (businessKey) => () => {
+    dispatch(expandBusiness(businessKey));
   }
 
   const calcOrderProgress = (businessKey, ms) => {
@@ -99,6 +103,8 @@ export const Game = () => {
             manager={businesses[businessKey]?.manager}
             timeCost={msToHMS(businessesConfig[businessKey].initialTime)}
             revenue={getRevenue(businessKey)}
+            onExpandBusiness={onExpandBusiness}
+            level={businesses[businessKey] ? businesses[businessKey]?.level : 1}
           />)}
         </div>
       </div>

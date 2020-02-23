@@ -67,11 +67,13 @@ function GameBll() {
       const businessesConfig = config.get(`businesses`);
       const currentGame = await gameRepository.findOne();
       const business = await businessRepository.findByBusinessKey(businessKey);
-      // calc revenue
+      
+      // Calc revenue
       const initialTime = businessesConfig[businessKey].initialTime;
       const initialProductivity = businessesConfig[businessKey].initialProductivity;
       let profit = (initialProductivity * business.level) * (initialTime / 1000);
       let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
+  
       currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
       await gameRepository.save(currentGame);
 

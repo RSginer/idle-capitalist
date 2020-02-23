@@ -15,7 +15,7 @@ export const Business = (props) => {
         </button>
       </div>}
       <div>
-        <div className="business-level">{props.title} - level 1</div>
+  <div className="business-level">{props.title} - level {props.level}</div>
         <div className="business-control" style={{ backgroundImage: `url("${props.picture}")` }}>
           {!props.processingOrder && !props.manager && <div onClick={props.onManageOrder(props.businessKey)} className="business-control-label">
             <span className="business-control-label-message">Click to manage order</span>
@@ -36,7 +36,7 @@ export const Business = (props) => {
           </div>
           <div className="timer">{props.timer}</div>
           <div className="business-expand">
-            <button className="business-expand-btn">Expand <CurrencyFormat value={props.costNextExpand} displayType={'text'} thousandSeparator={true} prefix={'$'} /></button>
+            <button disabled={props.totalCashAmount < props.costNextExpand} onClick={props.onExpandBusiness(props.businessKey)} className="business-expand-btn">Expand <CurrencyFormat value={props.costNextExpand} displayType={'text'} thousandSeparator={true} prefix={'$'} /></button>
           </div>
         </div>
       </div>

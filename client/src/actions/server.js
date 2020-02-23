@@ -13,3 +13,10 @@ export function manageOrder(payload) {
     message: payload
   }
 }
+
+export function expandBusiness(payload) {
+  return {
+    command: serverComands.EXPAND_BUSINESS,
+    message: payload
+  }
+}
