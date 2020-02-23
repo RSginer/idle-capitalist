@@ -27,3 +27,10 @@ export function hireManager(payload) {
     message: payload
   }
 }
+
+export function manageOrderStart(payload) {
+  return {
+    command: serverComands.MANAGE_ORDER_START,
+    message: payload
+  }
+}

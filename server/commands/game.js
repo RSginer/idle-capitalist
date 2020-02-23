@@ -13,11 +13,12 @@ function GameCommandsManager(ws) {
   const eventEmitter = new EventEmitter();
 
   // Listen Events
-  eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness)
-  eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder)
-  eventEmitter.on(serverCommands.EXPAND_BUSINESS, onExpandBusiness)
+  eventEmitter.on(serverCommands.BUY_BUSINESS, onBuyBusiness);
+  eventEmitter.on(serverCommands.MANAGE_ORDER, onManageOrder);
+  eventEmitter.on(serverCommands.EXPAND_BUSINESS, onExpandBusiness);
   eventEmitter.on(serverCommands.HIRE_MANAGER, onHireManager);
   eventEmitter.on(serverCommands.CONNECTION_CLOSED, onConnectionClosed);
+  eventEmitter.on(serverCommands.MANAGE_ORDER_START, onManageOrderStart);
 
   // Methods
   async function onBuyBusiness(businessKey) {
@@ -38,17 +39,19 @@ function GameCommandsManager(ws) {
   }
 
   async function onManageOrder(businessKey) {
-    debug(`Managing order for ${businessKey}...`);
+    const now = Date.now();
+
+    debug(`Managing order finished for ${businessKey} at ${now}...`);
     try {
-      const manageOrderResult = await gameBll.manageOrder(businessKey)
+      const manageOrderResult = await gameBll.manageOrder(businessKey, now)
 
       if (manageOrderResult) {
         ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_SUCCESS, manageOrderResult));
-        debug(`Managed order success for ${businessKey}!`);
+        debug(`Managed order finished success for ${businessKey} at ${now}!`);
       }
 
     } catch (err) {
-      debug(`Manage order error ${businessKey}!`, err)
+      debug(`Manage order finished error for ${businessKey} at ${now}!`, err)
       ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_ERROR, err));
     }
   }
@@ -89,6 +92,16 @@ function GameCommandsManager(ws) {
       await gameBll.updateLastConnectionTime(Date.now())
     } catch (err) {
       debug('Updating last connection time error!', err);
+    }
+  }
+
+  async function onManageOrderStart(businessKey) {
+    const now = Date.now();
+    debug(`Manage order started at ${now} for business ${businessKey}`)
+    try {
+      await gameBll.manageOrderStart(businessKey, now);
+    } catch (err) {
+      debug(`Manage order started at ${now} for business ${businessKey} error`, error)
     }
   }
 
