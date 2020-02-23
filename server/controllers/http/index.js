@@ -1,15 +1,13 @@
 const debug = require('debug')('idle-capitalist-server:controller');
 
-const GameBll = require('../../bll/game');
+const gameService = require('../../services/game')();
 const config = require('config');
 
 function GameHttpController() {
 
-  const gameBll = GameBll();
-
   async function initGame(req, res) {
     try {
-      const initGameResult = await gameBll.initGame();
+      const initGameResult = await gameService.initGame();
       const businessesConfig = config.get('businesses');
       const firstBusinessConfigKey = Object.keys(businessesConfig)[0]
       const firstBusinessInitialTime = businessesConfig[firstBusinessConfigKey].initialTime;

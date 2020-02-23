@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 const clientCommands = require('./types/client');
 const serverCommands = require('./types/server');
 const util = require('../util');
-const gameBll = require('../bll/game')();
+const gameService = require('../services/game')();
 
 const debug = require('debug')('idle-capitalist-server:commands');
 
@@ -24,7 +24,7 @@ function GameCommandsManager(ws) {
   async function onBuyBusiness(businessKey) {
     debug(`Buying business ${businessKey}...`);
     try {
-      const buyBusinessResult = await gameBll.buyBusiness(businessKey)
+      const buyBusinessResult = await gameService.buyBusiness(businessKey)
 
       if (buyBusinessResult) {
         ws.send(util.clientCommand(clientCommands.BUY_BUSINESS_SUCCESS, buyBusinessResult));
@@ -43,7 +43,7 @@ function GameCommandsManager(ws) {
 
     debug(`Managing order finished for ${businessKey} at ${now}...`);
     try {
-      const manageOrderResult = await gameBll.manageOrder(businessKey, now)
+      const manageOrderResult = await gameService.manageOrder(businessKey, now)
 
       if (manageOrderResult) {
         ws.send(util.clientCommand(clientCommands.MANAGE_ORDER_SUCCESS, manageOrderResult));
@@ -59,7 +59,7 @@ function GameCommandsManager(ws) {
   async function onExpandBusiness(businessKey) {
     debug(`Expanding business ${businessKey}...`);
     try {
-      const expandBusinessResult = await gameBll.expandBusiness(businessKey);
+      const expandBusinessResult = await gameService.expandBusiness(businessKey);
 
       if (expandBusinessResult) {
         ws.send(util.clientCommand(clientCommands.EXPAND_BUSINESS_SUCCESS, expandBusinessResult));
@@ -74,7 +74,7 @@ function GameCommandsManager(ws) {
   async function onHireManager(businessKey) {
     debug(`Hiring manager for business ${businessKey}...`);
     try {
-      const hireManagerResult = await gameBll.hireManager(businessKey);
+      const hireManagerResult = await gameService.hireManager(businessKey);
 
       if (hireManagerResult) {
         ws.send(util.clientCommand(clientCommands.HIRE_MANAGER_SUCCESS, hireManagerResult));
@@ -89,7 +89,7 @@ function GameCommandsManager(ws) {
   async function onConnectionClosed() {
     debug(`Client disconnected, updating last connection time...`);
     try {
-      await gameBll.updateLastConnectionTime(Date.now())
+      await gameService.updateLastConnectionTime(Date.now())
     } catch (err) {
       debug('Updating last connection time error!', err);
     }
@@ -99,7 +99,7 @@ function GameCommandsManager(ws) {
     const now = Date.now();
     debug(`Manage order started at ${now} for business ${businessKey}`)
     try {
-      await gameBll.manageOrderStart(businessKey, now);
+      await gameService.manageOrderStart(businessKey, now);
     } catch (err) {
       debug(`Manage order started at ${now} for business ${businessKey} error`, error)
     }

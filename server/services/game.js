@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('idle-capitalist-server:bll');
+const debug = require('debug')('idle-capitalist-server:service');
 const GameRepository = require('../repository/game');
 const BusinessRepository = require('../repository/business');
 const util = require('../util')
@@ -9,7 +9,7 @@ const config = require('config');
 const gameRepository = GameRepository();
 const businessRepository = BusinessRepository();
 
-function GameBll() {
+function GameService() {
 
   async function initGame() {
     let currentGame;
@@ -22,7 +22,7 @@ function GameBll() {
 
     if (!currentGame) {
       isNewGame = true;
-      currentGame = gameRepository.create(config.get('initialGameState'))
+      currentGame = await gameRepository.create(config.get('initialGameState'))
     }
 
     if (!isNewGame) {
@@ -30,14 +30,16 @@ function GameBll() {
       const businessesConfig = config.get(`businesses`);
       const businesses = await businessRepository.find();
       revenue = 0;
-  
-      businesses && businesses.length > 0 && businesses.map((business) => {
-        if (business.manager === true) {
-          hasManagers = true;
-          const initialProductivity = businessesConfig[business.businessKey].initialProductivity;
-          revenue = util.getBusinessRevenue(initialProductivity, business.level, time);
-        }
-      })
+      
+      if (businesses && businesses.length > 0) {
+        businesses.map((business) => {
+          if (business.manager === true) {
+            hasManagers = true;
+            const initialProductivity = businessesConfig[business.businessKey].initialProductivity;
+            revenue = util.getBusinessRevenue(initialProductivity, business.level, time);
+          }
+        })
+      }
 
       const totalCashAmount = parseFloat(currentGame.totalCashAmount);
 
@@ -86,24 +88,33 @@ function GameBll() {
   }
 
   // Manage Order
-  async function manageOrder(businessKey) {
-    // TODO: check if initialTime is out
+  async function manageOrder(businessKey, finishDateInMs) {
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
     const business = await businessRepository.findByBusinessKey(businessKey);
     const initialTime = businessesConfig[businessKey].initialTime;
     const initialProductivity = businessesConfig[businessKey].initialProductivity;
-    let profit = util.getBusinessRevenue(initialProductivity, business.level, initialTime)
-    let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
 
-    currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
-    await gameRepository.save(currentGame);
+    if ((finishDateInMs - business.lastOrderStarted) >= initialTime) {
+      let profit = util.getBusinessRevenue(initialProductivity, business.level, initialTime)
+      let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
+  
+      currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
+      await gameRepository.save(currentGame);
+    } else {
+      throw new Error('The Order is not finished yet!')
+    }
 
     return currentGame.totalCashAmount;
   }
 
   async function manageOrderStart(businessKey, startDateInMs) {
-    
+    const business = await businessRepository.findByBusinessKey(businessKey);
+
+    if (business) {
+      business.lastOrderStarted = startDateInMs;
+      await businessRepository.save(business);
+    }
   }
 
   // Expand business
@@ -172,4 +183,4 @@ function GameBll() {
   }
 }
 
-module.exports = GameBll;
+module.exports = GameService;
