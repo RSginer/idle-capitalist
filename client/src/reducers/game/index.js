@@ -48,6 +48,7 @@ function factoryBusinesses(businessesServerResult) {
   businessesServerResult.map((business) => {
     return businesses[business.businessKey] = {
       owner: true,
+      level: business.level,
       managers: business.managers
     }
   });
@@ -109,10 +110,7 @@ function manageOrderTick(state, action) {
 function manageOrderFinish(state, action) {
   const newState = {...state};
   const businessKey = action.payload;
-  const business = newState.businesses[businessKey];
-
-  console.log(business)
-  
+  const business = newState.businesses[businessKey];  
 
   // calc revenue
   const initialRevenue = newState.businessesConfig[businessKey].initialRevenue;
