@@ -17,7 +17,7 @@ export const Business = (props) => {
       <div>
         <div className="business-level">{props.title} - level 1</div>
         <div className="business-control" style={{ backgroundImage: `url("${props.picture}")` }}>
-          {!props.processingOrder && <div  onClick={props.onManageOrder(props.businessKey)} className="business-control-label">
+          {!props.processingOrder && <div onClick={props.onManageOrder(props.businessKey)} className="business-control-label">
             <span className="business-control-label-message">Click to manage order</span>
           </div>}
         </div>
@@ -27,8 +27,8 @@ export const Business = (props) => {
             <p className="business-managers-label">Hire Managers! -></p>
             {<div className="business-manager">
               <div className="manager-picture">
-                {props.managersBasePrice}$
-            </div>
+                <CurrencyFormat value={props.managersBasePrice} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+              </div>
             </div>}
           </div>
           <div className="timer">{props.timer}</div>

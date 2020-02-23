@@ -42,7 +42,7 @@ function GameBll() {
           business = await businessRepository.create({
             businessKey: businessKey,
             level: 1,
-            managers: []
+            manager: false
           })
 
           currentGame.businesses.push(business.id);
@@ -51,7 +51,7 @@ function GameBll() {
         } else {
           throw new Error(`You don't have money to buy this`)
         }
-        debug(business)
+
         return business;
       } else {
         throw new Error('Invalid business type');
