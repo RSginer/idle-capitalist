@@ -33,7 +33,8 @@ export default (state = {
     case types.MANAGE_ORDER_TICK:
       return manageOrderTick(state, action);
     case types.MANAGE_ORDER_FINISH:
-      return {...state};
+      // TODO: put this logic in backend 
+      return manageOrderFinish(state, action)
     case types.MANAGE_ORDER_SUCCESS:
       return state;
     default:
@@ -91,12 +92,30 @@ function manageOrderTick(state, action) {
   if (business.timer > 0) {
     business.processingOrder = true;
     business.timer = business.timer - 100;
-  } else {
+  } else if (!business.managers || business.managers.length === 0){
     business.processingOrder = false;
     business.timer = 0;
+  } else {
+    business.processingOrder = true;
+    business.timer = newState.businessesConfig[businessKey].baseOrderTimerInMs;
   }
 
   newState.businesses[businessKey] = {...business };
 
   return {...newState, businesses: {...newState.businesses}};
+}
+
+function manageOrderFinish(state, action) {
+  const newState = {...state};
+  const businessKey = action.payload;
+  const business = newState.businesses[businessKey];
+  let profit = newState.businessesConfig[businessKey].baseProfitOrder;
+
+  if (business.managers && business.managers.length > 0) {
+    profit = profit * business.managers.length;
+  }
+
+  newState.totalCashAmount += profit;
+
+  return {...newState};
 }
