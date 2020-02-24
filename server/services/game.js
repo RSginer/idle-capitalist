@@ -43,7 +43,11 @@ function GameService() {
       }
 
       const totalCashAmount = currentGame.totalCashAmount;
-      currentGame.lastConnectionClosedDateInMs = Date.now();
+
+      if (!isNewGame) {
+        currentGame.lastConnectionClosedDateInMs = Date.now();
+      }
+
       currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100;
       await gameRepository.save(currentGame);
     }
