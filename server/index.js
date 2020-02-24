@@ -51,7 +51,7 @@ wss.on('connection', function (ws, request) {
 });
 
 
-setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`).then(() => {
+setupDB(`${config.get('db.protocol')}${process.env.DOCKER ? 'mongodb' : config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`).then(() => {
   server.listen(3001, function () {
     debug('Listening on http://localhost:3001');
   });

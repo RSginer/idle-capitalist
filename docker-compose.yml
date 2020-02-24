@@ -1,0 +1,42 @@
+version: "2"
+services:
+    client:
+        build:
+          context: ./client
+        image: idle-capitalist-client
+        restart: always
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/client
+            - /client/node_modules
+        links:
+            - server
+        networks:
+            - webappnetwork
+    server:
+        build:
+          context: ./server
+        image: idle-capitalist-server
+        restart: always
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./server:/server
+            - /server/node_modules
+        depends_on:
+            - mongodb
+        networks:
+            - webappnetwork
+    mongodb:
+      image: mongo
+      restart: always
+      container_name: mongodb
+      ports:
+          - 27017:27017
+      command: mongod --noauth
+      networks:
+          - webappnetwork
+networks:
+  webappnetwork:
+      driver: bridge
