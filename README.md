@@ -86,7 +86,7 @@ This Model is used to store the game data.
 ```js
 Game: {
   totalCashAmount: Number,
-  businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
+  businesses: [Business],
   lastConnectionClosedDateInMs: Number
 }
 ```
