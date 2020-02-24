@@ -25,7 +25,9 @@ function BusinessRepository() {
 
 
   async function save(business) {
-    return await business.save();
+    const res = await business.save();
+    debug('BusinessRepository.save', res);
+    return res;
   }
 
   return {

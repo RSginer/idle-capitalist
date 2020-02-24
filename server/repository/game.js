@@ -18,7 +18,9 @@ function GameRepository() {
   }
 
   async function save(game) {
-    return await game.save();
+    const res = await game.save();
+    debug('GameRepository.save', res);
+    return res;
   }
 
   return {
