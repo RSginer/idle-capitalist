@@ -14,12 +14,12 @@ export default (state = {
     case types.WS_DISCONNECTED:
       return {...state, socketConnected: false};
     case types.WS_CONNECTED:
-      return {...state, socketConnected: true}
+      return {...state, socketConnected: true, loading: false}
 
     // Init Game
     case types.INIT_GAME_SUCCESS:
       return {
-        ...state, loading: false,
+        ...state,
         error: null,
         totalCashAmount: parseInt(action.payload.gameState.totalCashAmount),
         businesses: factoryBusinesses(action.payload.gameState.businesses),

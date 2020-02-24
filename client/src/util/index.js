@@ -1,5 +1,3 @@
-'use strict';
-
 // Maths
 function getBusinessRevenue(initialProductivity, businessLevel, ms) {
   const revenue = (initialProductivity * businessLevel) * (ms / 1000);

@@ -9,7 +9,7 @@ function* connectWebsocket() {
 }
 
 function* websocketConnectionSaga() {
-  yield takeEvery(types.INIT_GAME_SUCCESS, connectWebsocket);
+  yield takeEvery(types.INIT_GAME, connectWebsocket);
 }
 
 export default function* rootSaga() {

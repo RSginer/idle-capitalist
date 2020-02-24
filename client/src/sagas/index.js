@@ -22,7 +22,7 @@ function* initGame() {
 }
 
 function* initialSaga() {
-  yield takeEvery(types.INIT_GAME, initGame);
+  yield takeEvery(types.WS_CONNECTED, initGame);
 }
 
 export default initialSaga;

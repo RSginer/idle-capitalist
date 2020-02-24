@@ -50,7 +50,11 @@ const socketMiddleware = () => {
         socket = null;
         break;
       case types.WS_MESSAGE:
-        socket.send(JSON.stringify({ command: action.payload.command, payload: action.payload.message }));
+        try {
+          socket.send(JSON.stringify({ command: action.payload.command, payload: action.payload.message }));
+        } catch (err) {
+          console.log(err);
+        }
         break;
       default:
         return next(action);
