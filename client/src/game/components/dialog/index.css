@@ -7,13 +7,15 @@
   top: 110px;
 }
 
-.dialog-header, .dialog-actions {
+.dialog-header,
+.dialog-actions {
   width: 100%;
   background: #ccc;
   text-align: center;
 }
 
-.dialog-header .header-title, .dialog-actions .actions {
+.dialog-header .header-title,
+.dialog-actions .actions {
   padding: 10px;
   display: block;
 }
@@ -23,6 +25,12 @@
   height: 530px;
   justify-content: center;
   align-items: center;
+}
+
+.dialog-body .body-content {
+  text-align: center;
+  padding: 20px;
+  line-height: 1.4;
 }
 
 .dialog-actions .actions .button {
