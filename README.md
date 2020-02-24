@@ -67,7 +67,7 @@ npm run start
 
 * Go to http://localhost:3000 🤘
 
-## Technical things
+## 👨‍💻 Technical things
 // TODO: write architecture decisions
 
 ## 🤓 Maths
