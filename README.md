@@ -16,55 +16,55 @@
   - ✅ Websocket reconnection.
 
 ## Getting Started 🎉
-Clone 
+* Clone the repository. 
 ```bash
 git clone https://github.com/RSginer/idle-capitalist.git
 ```
-### With Docker and Docker Compose
-Build
+### Docker
+* Build images.
 ```bash
 cd idle-capitalist
 docker-compose build
 ```
 
-Up
+* Run the containers.
 ```bash 
 docker-compose up
 ```
 
-Go to http://localhost:3000 🤘
-### With npm
-This option needs Node.js 12.16.1 installed and MongoDB instance running on your localhost
-#### Runing the server
+* Go to http://localhost:3000 🤘
+### npm
+* This option needs Node.js v12.16.1 installed and a MongoDB instance running on your localhost
+#### Start Server
 
-Install dependencies
+* Install dependencies
 ```bash
 cd idle-capitalist/server
 npm install
 ```
 
-Run
+* Start the server
 ```bash
 npm run start
 ```
 
-Run dev
+* Start the server in development mode
 ```bash
 npm run start:dev
 ```
-#### Runing the client
-Install dependencies
+#### Start Client
+* Install dependencies
 ```bash
 cd idle-capitalist/client
 npm install
 ```
 
-Run
+* Start Webapp
 ```bash
 npm run start
 ```
 
-Go to http://localhost:3000 🤘
+* Go to http://localhost:3000 🤘
 ## Maths
 ![alt text](https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png "Maths of Idle capitalist table")
 
