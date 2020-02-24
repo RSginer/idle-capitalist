@@ -46,13 +46,10 @@ function* hireManagerSuccessSaga() {
 function* manageOrder(action) {
   yield put({ type: types.WS_MESSAGE, payload: serverActions.manageOrder(action.payload) });
   const businesses = yield select((state) => state.game.businesses);
-  const keys = Object.keys(businesses);
-  const length = keys.length
-  for (let index = 0; index < length; index++) {
-    const business = businesses[keys[index]];
-    if (business.manager === true && !business.processingOrder) {
-      yield put({ type: types.MANAGE_ORDER, payload: keys[index] })
-    }
+  const business = businesses[action.payload];
+  if (business && business.manager === true && !business.processingOrder) {
+    yield put({ type: types.MANAGE_ORDER, payload: action.payload })
+     
   }
 }
 
