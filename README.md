@@ -1,7 +1,7 @@
 # idle-capitalist
-<div style="text-align: center">
-  <img src="https://i.imgur.com/NWVNAji.gif" alt="Idle Capitalist">
-</div>
+<span style="display:block;text-align: center">
+  ![alt text](https://i.imgur.com/NWVNAji.gif "Idle Capitalist")
+</span>
 
 ### Features
   - ✅ Buy Business.
