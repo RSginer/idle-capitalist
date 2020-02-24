@@ -69,8 +69,7 @@ npm run start
 ![alt text](https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png "Maths of Idle capitalist table")
 
 * Calculating expand business cost (owned = business level)
-
-$$cost_{next} = cost_{base} \times (rate_{growth})^{owned}.$$
+<img src="https://render.githubusercontent.com/render/math?math=cost_{next} = cost_{base} \times (rate_{growth})^{owned}">
 
 * Calculating order revenue per second
 
