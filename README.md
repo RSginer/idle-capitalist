@@ -65,10 +65,21 @@ npm run start
 ```
 
 * Go to http://localhost:3000 🤘
-## Maths
+## 🤓 Maths
 ![alt text](https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png "Maths of Idle capitalist table")
 
+* Calculating expand business cost (owned = business level)
+$$cost_{next} = cost_{base} \times (rate_{growth})^{owned}.$$
 
+* Calculating order revenue per second
+$$production_{total} = (production_{base} \times owned) \times.$$
+
+* Managers price is fixed depends on the business:
+  - Lemonade Stand: $1,000
+  - Newspaper Delivery: $15,000
+  - Car Wash: $100,000
+  - Pizza Delivery: $500,000
+  - Donut Shop: $1,200,000
 
 * Source: https://blog.kongregate.com/the-math-of-idle-games-part-i/
 
