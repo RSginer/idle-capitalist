@@ -73,7 +73,7 @@ This game uses two compatible architecture patterns, a common **onion architectu
 Client and server communicates their commands throght a **websocket**.
 
 ### Client
-Client is a **React-Redux webapp**, with React-Saga to manage Effects.
+Client is a **React-Redux webapp**, with **Redux-Saga**.
 
 ### Server
 Server is a **Node.js** with **Express** server.
