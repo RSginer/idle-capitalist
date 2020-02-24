@@ -112,7 +112,7 @@ function manageOrderTick(state, action) {
   const business = newState.businesses[businessKey];
   if (business.timer > 0) {
     business.processingOrder = true;
-    business.timer = business.timer - 100;
+    business.timer = business.timer - 10;
   } else if (!business.managers || business.managers.length === 0) {
     business.timer = 0;
     business.processingOrder = false;

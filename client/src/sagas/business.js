@@ -72,7 +72,7 @@ function manageOrderDelay(businessKey) {
     while (isProcessing) {
       yield put({ type: types.MANAGE_ORDER_TICK, payload: businessKey });
       isProcessing = yield select(getIsProcessing(businessKey));
-      yield call(delay, 100);
+      yield call(delay, 10);
     }
 
     yield put({ type: types.MANAGE_ORDER_FINISH, payload: businessKey });

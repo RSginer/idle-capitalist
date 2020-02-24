@@ -35,6 +35,7 @@
   text-transform: capitalize;
 }
 .business-actions {
+  position: relative;
   margin-top: 2px;
   display: flex;
   padding: 4px;
@@ -42,9 +43,12 @@
 }
 
 .business-actions .timer {
-  display: flex;
-  align-items: center;
-  color: white;
+  position: absolute;
+  left: 320px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #003c00;
+  top: 22px;
 }
 
 .business-managers {
