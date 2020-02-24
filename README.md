@@ -67,6 +67,9 @@ npm run start
 
 * Go to http://localhost:3000 🤘
 
+## Technical things
+// TODO: write architecture decisions
+
 ## 🤓 Maths
 * Calculating expand business cost.
 
@@ -93,4 +96,3 @@ npm run start
 <img src="https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png" alt="Maths of Idle capitalist table" width="500px" />
 
 * 👨🏻‍🎓📚 **Bibliography**: https://blog.kongregate.com/the-math-of-idle-games-part-i/
-
