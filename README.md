@@ -101,7 +101,7 @@ Business: {
   lastConnectionClosedDateInMs: Number
 }
 ```
-### 🤓 Maths
+### Maths
 * Calculating expand business cost.
 
 <img src="https://render.githubusercontent.com/render/math?math=cost_{next} = cost_{base} \times (rate_{growth})^{owned}">
