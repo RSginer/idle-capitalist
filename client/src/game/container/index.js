@@ -114,7 +114,7 @@ export const Game = () => {
       <Cash amount={totalCashAmount} />
       <Dialog opened={showIdleDialog} content={`You were offline for ${msToDHMS(idleTime).d} days ${msToDHMS(idleTime).h} hours ${msToDHMS(idleTime).m} minutes ${msToDHMS(idleTime).s} seconds, and your businesses generated $${idleRevenue?.toFixed(2)} for you`}
        title="Welcome back!" actionText="Ok, thanks" onActionClick={() => onIdleDialogClose()} />
-      <Dialog opened={!socketConnected} content="You lost the connection with the server, try to reconnect clicking the button bellow" title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
+      <Dialog opened={!socketConnected} content="You lost the connection with the server, try to reconnect clicking the button bellow, don't worry your businesses are still working for you." title="Disconnected Socket" actionText="Reconnect" onActionClick={() => onSocketDisconnected()} />
 
       <div className="game-businesses-container">
         <div className="game-businesses-list">
