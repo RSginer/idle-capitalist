@@ -2,9 +2,9 @@
 
 const debug = require('debug')('idle-capitalist-server:controller');
 const util = require('../../util');
-const clientCommands = require('../../commands/types/client');
-const serverCommands = require('../../commands/types/server');
-const GameCommandsManager = require('../../commands/game');
+const clientCommands = require('../../cqrs/types/client');
+const serverCommands = require('../../cqrs/types/server');
+const GameCommandsManager = require('../../cqrs/game');
 
 
 function GameWebsocketController(ws) {

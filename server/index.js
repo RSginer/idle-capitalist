@@ -9,15 +9,9 @@ const WebSocket = require('ws');
 const cors = require('cors');
 const app = express();
 const config = require('config');
-
 const setupDB = require('./db');
-
-setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`);
-
-// Controllers
 const GameWebsocketController = require('./controllers/ws');
 const GameHttpController = require('./controllers/http');
-
 const gameHttpController = GameHttpController();
 
 app.use(cors());
@@ -57,6 +51,9 @@ wss.on('connection', function (ws, request) {
 });
 
 
-server.listen(3001, function () {
-  debug('Listening on http://localhost:3001');
-});
+setupDB(`${config.get('db.protocol')}${config.get('db.host')}:${config.get('db.port')}/${config.get('db.database')}`).then(() => {
+  server.listen(3001, function () {
+    debug('Listening on http://localhost:3001');
+  });
+})
+.catch((err) => debug('Data base connection error', err))

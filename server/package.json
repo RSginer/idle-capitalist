@@ -4,6 +4,7 @@
   "description": "Backend for the game",
   "main": "index.js",
   "scripts": {
+    "start": "DEBUG=idle-capitalist-server:* node index.js",
     "start:dev": "DEBUG=idle-capitalist-server:* nodemon index.js"
   },
   "repository": {
