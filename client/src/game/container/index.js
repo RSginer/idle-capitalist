@@ -95,6 +95,12 @@ export const Game = () => {
     return util.getBusinessRevenue(initialProductivity, level, initialTime);
   }
 
+  const getRevenuePerSecond = (businessKey) => {
+    const level = (businesses[businessKey] ? businesses[businessKey].level : 1);
+    const initialProductivity = businessesConfig[businessKey].initialProductivity;
+    return util.getBusinessRevenuePerSecond(initialProductivity, level)
+  }
+
   const onIdleDialogClose = () => {
     dispatch(closeIdleDialog())
   }
@@ -134,6 +140,7 @@ export const Game = () => {
             onExpandBusiness={onExpandBusiness}
             level={businesses[businessKey] ? businesses[businessKey]?.level : 1}
             onHireManager={onHireManager}
+            revenuePerSecond={getRevenuePerSecond(businessKey)}
           />)}
         </div>
       </div>

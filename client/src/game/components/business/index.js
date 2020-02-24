@@ -22,7 +22,10 @@ export const Business = (props) => {
             <span className="business-control-label-message-info">Revenue: <CurrencyFormat value={props.revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} /> Time cost: {props.timeCost}</span>
           </div>}
         </div>
-        <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="gray" strokeColor="yellowgreen" percent={props.orderProgress} />
+        <div className="business-progress-bar">
+          <Line strokeWidth="3" trailWidth={3} strokeLinecap="square" trailColor="gray" strokeColor="yellowgreen" percent={props.orderProgress} />
+          {props.manager && <div className="business-progress-bar-revenue-per-second"><CurrencyFormat value={props.revenuePerSecond} displayType={'text'} thousandSeparator={true} prefix={'$'} />/sec</div>}
+        </div>
         <div className="business-actions">
           <div className="business-managers">
             <p className="business-managers-label">{!props.manager ? 'Hire a Manager! ->' : 'Manager hired!'}</p>

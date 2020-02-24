@@ -143,3 +143,16 @@
   background-color: gray;
   cursor: not-allowed;
 }
+
+.business-progress-bar {
+  position: relative;
+}
+
+.business-progress-bar .business-progress-bar-revenue-per-second {
+  position: absolute;
+  top: 4px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7em;
+  color: white;
+}
