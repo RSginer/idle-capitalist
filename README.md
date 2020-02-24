@@ -78,6 +78,9 @@ Client is a **React-Redux webapp**, with **Redux-Saga**.
 ### Server
 Server is a **Node.js** with **Express** server.
 
+### Database
+Server uses a **MongoDB** database.
+
 #### Game Model Schema
 This Model is used to store the game data.
 ```js
