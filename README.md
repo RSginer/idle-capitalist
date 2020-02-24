@@ -66,14 +66,14 @@ npm run start
 
 * Go to http://localhost:3000 🤘
 ## 🤓 Maths
-![alt text](https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png "Maths of Idle capitalist table")
-
 * Calculating expand business cost (owned = business level)
 <img src="https://render.githubusercontent.com/render/math?math=cost_{next} = cost_{base} \times (rate_{growth})^{owned}">
 
 * Calculating order revenue per second
+<img src="https://render.githubusercontent.com/render/math?math=production_{total} = (production_{base} \times owned) \times">
 
-$$production_{total} = (production_{base} \times owned) \times.$$
+* Initial values
+<img src="https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png" alt="Maths of Idle capitalist table" width="200px" />
 
 * Managers price is fixed depends on the business:
   - Lemonade Stand: $1,000
