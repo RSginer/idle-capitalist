@@ -22,9 +22,8 @@ function GameService() {
 
     if (!currentGame) {
       isNewGame = true;
-      const newGame = config.get('initialGameState');
-      newGame.lastConnectionClosedDateInMs = Date.now();
-      currentGame = await gameRepository.create(config.get('initialGameState'))
+      let newGame = config.get('initialGameState');
+      currentGame = await gameRepository.create({ ...newGame, lastConnectionClosedDateInMs: Date.now() })
     }
 
     if (!isNewGame) {
@@ -32,7 +31,7 @@ function GameService() {
       const businessesConfig = config.get(`businesses`);
       const businesses = await businessRepository.find();
       revenue = 0;
-      
+
       if (businesses && businesses.length > 0) {
         businesses.map((business) => {
           if (business.manager === true) {
@@ -46,7 +45,7 @@ function GameService() {
       const totalCashAmount = currentGame.totalCashAmount;
       currentGame.lastConnectionClosedDateInMs = Date.now();
       currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100;
-      await gameRepository.save(currentGame); 
+      await gameRepository.save(currentGame);
     }
 
     const result = {
@@ -102,7 +101,7 @@ function GameService() {
     if ((finishDateInMs - business.lastOrderStarted) >= initialTime) {
       let profit = util.getBusinessRevenue(initialProductivity, business.level, initialTime)
       let totalCashAmount = currentGame.totalCashAmount + profit;
-  
+
       currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
       await gameRepository.save(currentGame);
     } else {
