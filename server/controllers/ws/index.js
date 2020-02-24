@@ -4,11 +4,11 @@ const debug = require('debug')('idle-capitalist-server:controller');
 const util = require('../../util');
 const clientCommands = require('../../cqrs/types/client');
 const serverCommands = require('../../cqrs/types/server');
-const GameCommandsManager = require('../../cqrs/game');
+const GameCQRSManager = require('../../cqrs/game');
 
 
 function GameWebsocketController(ws) {
-  const gameCommandsManager = GameCommandsManager(ws);
+  const gameCQRSManager = GameCQRSManager(ws);
 
   function onMessage(message) {
     try {
@@ -16,7 +16,7 @@ function GameWebsocketController(ws) {
 
       if (Object.values(serverCommands).includes(parsedMessage.command)) {
         debug(`command: ${parsedMessage.command} payload: ${parsedMessage.payload}`);
-        gameCommandsManager.execCommand(parsedMessage.command, parsedMessage.payload);
+        gameCQRSManager.execCommand(parsedMessage.command, parsedMessage.payload);
       } else {
         if (!parsedMessage.command) {
           parsedMessage.command = 'undefined';
@@ -31,7 +31,7 @@ function GameWebsocketController(ws) {
   }
 
   function close() {
-    gameCommandsManager.execCommand(serverCommands.CONNECTION_CLOSED)
+    gameCQRSManager.execCommand(serverCommands.CONNECTION_CLOSED)
   }
   return {
     onMessage,

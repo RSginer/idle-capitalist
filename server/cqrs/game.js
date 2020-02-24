@@ -6,9 +6,9 @@ const serverCommands = require('./types/server');
 const util = require('../util');
 const gameService = require('../services/game')();
 
-const debug = require('debug')('idle-capitalist-server:commands');
+const debug = require('debug')('idle-capitalist-server:cqrs');
 
-function GameCommandsManager(ws) {
+function GameCQRSManager(ws) {
 
   const eventEmitter = new EventEmitter();
 
@@ -116,4 +116,4 @@ function GameCommandsManager(ws) {
 
 }
 
-module.exports = GameCommandsManager;
+module.exports = GameCQRSManager;
