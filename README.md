@@ -69,10 +69,15 @@ npm run start
 ## 🤓 Maths
 * Calculating expand business cost.
 
-  <img src="https://render.githubusercontent.com/render/math?math=cost_{next} = cost_{base} \times (rate_{growth})^{businessLevel}">
+<img src="https://render.githubusercontent.com/render/math?math=cost_{next} = cost_{base} \times (rate_{growth})^{owned}">
+<img src="https://render.githubusercontent.com/render/math?math=cost_{base} = {Initial Cost}">
+<img src="https://render.githubusercontent.com/render/math?math=rate_{growth} = {Coefficient}">
+<img src="https://render.githubusercontent.com/render/math?math=owned = {Business Level}">
 
 * Calculating order revenue per second
-  <img src="https://render.githubusercontent.com/render/math?math=production_{total} = (production_{base} \times businessLevel)">
+<img src="https://render.githubusercontent.com/render/math?math=production_{total} = (production_{base} \times owned)">
+<img src="https://render.githubusercontent.com/render/math?math=owned = {Business Level}">
+<img src="https://render.githubusercontent.com/render/math?math=production_{base} = {Initial Revenue}">
 
 
 * 👨🏻‍💼 Managers price is fixed depends on the business:
