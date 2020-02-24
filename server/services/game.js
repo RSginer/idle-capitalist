@@ -22,6 +22,8 @@ function GameService() {
 
     if (!currentGame) {
       isNewGame = true;
+      const newGame = config.get('initialGameState');
+      newGame.lastConnectionClosedDateInMs = Date.now();
       currentGame = await gameRepository.create(config.get('initialGameState'))
     }
 
@@ -42,7 +44,7 @@ function GameService() {
       }
 
       const totalCashAmount = currentGame.totalCashAmount;
-
+      currentGame.lastConnectionClosedDateInMs = Date.now();
       currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100;
       await gameRepository.save(currentGame); 
     }
@@ -59,6 +61,7 @@ function GameService() {
   }
 
   async function buyBusiness(businessKey) {
+    await updateLastConnectionTime(Date.now());
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
 
@@ -89,6 +92,7 @@ function GameService() {
 
   // Manage Order
   async function manageOrder(businessKey, finishDateInMs) {
+    await updateLastConnectionTime(Date.now());
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
     const business = await businessRepository.findByBusinessKey(businessKey);
@@ -109,6 +113,7 @@ function GameService() {
   }
 
   async function manageOrderStart(businessKey, startDateInMs) {
+    await updateLastConnectionTime(Date.now());
     const business = await businessRepository.findByBusinessKey(businessKey);
 
     if (business) {
@@ -119,6 +124,7 @@ function GameService() {
 
   // Expand business
   async function expandBusiness(businessKey) {
+    await updateLastConnectionTime(Date.now());
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
     let business = await businessRepository.findByBusinessKey(businessKey);
@@ -144,6 +150,7 @@ function GameService() {
 
   // Hire Manager
   async function hireManager(businessKey) {
+    await updateLastConnectionTime(Date.now());
     const businessesConfig = config.get(`businesses`);
     const currentGame = await gameRepository.findOne();
     const business = await businessRepository.findByBusinessKey(businessKey);
