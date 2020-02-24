@@ -49,7 +49,6 @@ function* manageOrder(action) {
   const business = businesses[action.payload];
   if (business && business.manager === true && !business.processingOrder) {
     yield put({ type: types.MANAGE_ORDER, payload: action.payload })
-     
   }
 }
 
