@@ -1,4 +1,4 @@
-# 🎮 Video game Idle Capitalist
+# Idle Capitalist
 <span style="display:block;text-align:center">
 
 ![alt text](https://i.imgur.com/NWVNAji.gif "Idle Capitalist")
