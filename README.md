@@ -91,5 +91,5 @@ npm run start
 
 <img src="https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png" alt="Maths of Idle capitalist table" width="500px" />
 
-* Source: https://blog.kongregate.com/the-math-of-idle-games-part-i/
+* 👨🏻‍🎓📚 **Bibliography**: https://blog.kongregate.com/the-math-of-idle-games-part-i/
 
