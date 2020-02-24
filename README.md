@@ -8,6 +8,7 @@
 
 ### Features
   - ✅ Buy Business.
+  - ✅ Multiple Business to choose
   - ✅ Upgrade Business.
   - ✅ Manage orders.
   - ✅ Hire Managers.
