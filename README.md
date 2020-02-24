@@ -11,5 +11,9 @@
   - ✅ Websocket reconnection.
 
 ## Maths
-I get the Maths behind this game from: https://blog.kongregate.com/the-math-of-idle-games-part-i/
+![alt text](https://cdn1.kongcdn.com/assets/files/0001/8435/anthony_idle_1.png "Maths of Idle capitalist table")
+
+
+
+* Source: https://blog.kongregate.com/the-math-of-idle-games-part-i/
 
