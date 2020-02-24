@@ -41,7 +41,7 @@ function GameService() {
         })
       }
 
-      const totalCashAmount = parseFloat(currentGame.totalCashAmount);
+      const totalCashAmount = currentGame.totalCashAmount;
 
       currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100;
       await gameRepository.save(currentGame); 
@@ -97,7 +97,7 @@ function GameService() {
 
     if ((finishDateInMs - business.lastOrderStarted) >= initialTime) {
       let profit = util.getBusinessRevenue(initialProductivity, business.level, initialTime)
-      let totalCashAmount = parseFloat(currentGame.totalCashAmount) + profit;
+      let totalCashAmount = currentGame.totalCashAmount + profit;
   
       currentGame.totalCashAmount = Math.round(totalCashAmount * 100) / 100;
       await gameRepository.save(currentGame);
@@ -125,7 +125,7 @@ function GameService() {
     const rateGrowth = businessesConfig[businessKey].coefficient;
     const costBase = businessesConfig[businessKey].initialCost;
     const cost = util.getNextExpandCost(costBase, business.level, rateGrowth);
-    const totalCashAmount = Math.round(parseFloat((currentGame.totalCashAmount) - cost) * 100) / 100;
+    const totalCashAmount = Math.round(((currentGame.totalCashAmount) - cost) * 100) / 100;
 
     if (totalCashAmount >= 0) {
       currentGame.totalCashAmount = totalCashAmount;
@@ -149,7 +149,7 @@ function GameService() {
     const business = await businessRepository.findByBusinessKey(businessKey);
 
     const managerPrice = businessesConfig[businessKey].managerPrice;
-    const totalCashAmount = parseFloat(currentGame.totalCashAmount);
+    const totalCashAmount = currentGame.totalCashAmount;
 
     if (totalCashAmount >= managerPrice) {
       currentGame.totalCashAmount = Math.round((totalCashAmount - managerPrice) * 100) / 100;

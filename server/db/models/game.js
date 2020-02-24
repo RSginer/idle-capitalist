@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const GameSchema = mongoose.Schema({
-  totalCashAmount: String,
+  totalCashAmount: Number,
   businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
   lastConnectionClosedDateInMs: Number
 });

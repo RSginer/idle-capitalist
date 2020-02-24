@@ -21,7 +21,7 @@ export default (state = {
       return {
         ...state,
         error: null,
-        totalCashAmount: parseInt(action.payload.gameState.totalCashAmount),
+        totalCashAmount: action.payload.gameState.totalCashAmount,
         businesses: factoryBusinesses(action.payload.gameState.businesses),
         businessesConfig: action.payload.businessesConfig,
         showIdleDialog: action.payload.showIdleDialog,

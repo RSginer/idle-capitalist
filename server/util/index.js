@@ -7,7 +7,7 @@ function clientCommand(command, payload) {
 // Maths
 function getBusinessRevenue(initialProductivity, businessLevel, ms) {
   const revenue = (initialProductivity * businessLevel) * (ms / 1000);
-  return Math.round(revenue * 100) / 100;
+  return revenue;
 }
 
 function getNextExpandCost(initialCost, businessLevel, rateGrowth) {
