@@ -68,8 +68,36 @@ npm run start
 * Go to http://localhost:3000 🤘
 
 ## 👨‍💻 Technical things
-// TODO: write architecture decisions
+This game uses two compatible architecture patterns, a common onion architecture (I know that's not very "cool" nowadays but I think that this backend is quite simple and I don't want to do over engineering, maybe for next releases can I refactor it to DDD pattern) with a simplified version of CQRS pattern.
 
+Client and server communicates their commands throght a websocket.
+
+### Client
+Client is a React-Redux webapp, with React-Saga to manage Effects.
+
+### Server
+Server is a Node.js with Express server.
+
+#### Game Model Schema
+This Model is used to store the game data.
+```js
+{
+  businessKey: String,
+  level: Number,
+  manager: Boolean,
+  lastOrderStarted: Number
+}
+```
+
+#### Business Model Schema
+This Model is used to store the businesses data for each `Game`
+```js
+{
+  totalCashAmount: Number,
+  businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
+  lastConnectionClosedDateInMs: Number
+}
+```
 ## 🤓 Maths
 * Calculating expand business cost.
 
