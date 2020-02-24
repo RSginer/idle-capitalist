@@ -81,7 +81,7 @@ Server is a **Node.js** with **Express** server.
 #### Game Model Schema
 This Model is used to store the game data.
 ```js
-{
+Game: {
   businessKey: String,
   level: Number,
   manager: Boolean,
@@ -92,7 +92,7 @@ This Model is used to store the game data.
 #### Business Model Schema
 This Model is used to store the businesses data for each `Game`
 ```js
-{
+Business: {
   totalCashAmount: Number,
   businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
   lastConnectionClosedDateInMs: Number
