@@ -12,7 +12,7 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case types.WS_DISCONNECTED:
-      return {...state, socketConnected: false};
+      return {...state, socketConnected: false, loading: false};
     case types.WS_CONNECTED:
       return {...state, socketConnected: true, loading: false}
 
