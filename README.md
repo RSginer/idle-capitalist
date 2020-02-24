@@ -85,10 +85,9 @@ Server uses a **MongoDB** database.
 This Model is used to store the game data.
 ```js
 Game: {
-  businessKey: String,
-  level: Number,
-  manager: Boolean,
-  lastOrderStarted: Number
+  totalCashAmount: Number,
+  businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
+  lastConnectionClosedDateInMs: Number
 }
 ```
 
@@ -96,9 +95,10 @@ Game: {
 This Model is used to store the businesses data for each `Game`
 ```js
 Business: {
-  totalCashAmount: Number,
-  businesses: [{type: mongoose.Schema.Types.ObjectId, ref: 'Business'}],
-  lastConnectionClosedDateInMs: Number
+  businessKey: String,
+  level: Number,
+  manager: Boolean,
+  lastOrderStarted: Number
 }
 ```
 ### Maths
