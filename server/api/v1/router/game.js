@@ -4,7 +4,7 @@ const gameHttpController = require('../../../controllers/http/index')()
 function GameRouter () {
   const router = express.Router()
 
-  router.post('/initGame', gameHttpController.initGame)
+  router.get('/initialGameState', gameHttpController.initGame)
 
   return router
 }
