@@ -4,7 +4,6 @@ const debug = require('debug')('idle-capitalist-server:service')
 const GameRepository = require('../repository/game')
 const BusinessRepository = require('../repository/business')
 const util = require('../util')
-
 const config = require('config')
 const gameRepository = GameRepository()
 const businessRepository = BusinessRepository()
