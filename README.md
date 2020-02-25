@@ -70,7 +70,7 @@ npm run start
 ## 👨‍💻 Technical things
 This game uses two compatible architecture patterns, a common **onion architecture** with a simplified version of **CQRS pattern**.
 
-The workflow: `Controller-> CQRS Exec Command -> Service -> Repository`;
+The workflow: `Controller-> CQRS Exec Command -> Service -> Repository`
 
 Client and server communicates their commands throght a **websocket**.
 
