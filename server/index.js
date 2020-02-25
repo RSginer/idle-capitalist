@@ -56,4 +56,4 @@ setupDB(`${config.get('db.protocol')}${process.env.DOCKER ? 'mongodb' : config.g
     debug('Listening on http://localhost:3001');
   });
 })
-.catch((err) => debug('Data base connection error', err))
+.catch((err) => debug('Database connection error', err))
