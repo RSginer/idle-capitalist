@@ -113,7 +113,7 @@ Business: {
 * Calculating business revenue per second
 <img src="https://render.githubusercontent.com/render/math?math=production_{total} = (production_{base} \times owned)">
 <img src="https://render.githubusercontent.com/render/math?math=owned = {Business Level}">
-<img src="https://render.githubusercontent.com/render/math?math=production_{base} = {Initial Revenue}">
+<img src="https://render.githubusercontent.com/render/math?math=production_{base} = {Initial Productivity}">
 
 
 * 👨🏻‍💼 Managers price is fixed depends on the business:
