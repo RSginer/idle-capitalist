@@ -5,7 +5,6 @@ const clientCommands = require('./types/client')
 const serverCommands = require('./types/server')
 const util = require('../util')
 const gameService = require('../services/game')()
-
 const debug = require('debug')('idle-capitalist-server:cqrs')
 
 function GameCQRSManager (ws) {
