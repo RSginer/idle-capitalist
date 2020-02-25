@@ -73,7 +73,7 @@ This game uses two compatible architecture patterns, a common **onion architectu
 Workflow: 
 `Web browser -> React Component -> Dispatch Redux Action -> Redux Saga Catch -> Websocket Emmit -> Server Websocket -> Controller -> CQRS Exec Command -> Service -> Repository -> Database`.
 
-Initial game state is fetched from a REST Api `GET /api/v1/initialGameState`.
+Initial game state is fetched from an REST API `GET /api/v1/initialGameState`.
 
 Client and server communicates their commands throght a **websocket**.
 
