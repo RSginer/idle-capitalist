@@ -68,7 +68,9 @@ npm run start
 * Go to http://localhost:3000 🤘
 
 ## 👨‍💻 Technical things
-This game uses two compatible architecture patterns, a common **onion architecture** (😉 I know that's not very "cool" nowadays but I think that this backend is quite simple and I don't want to do over engineering, maybe for next releases I can refactor it to DDD pattern) with a simplified version of **CQRS pattern**.
+This game uses two compatible architecture patterns, a common **onion architecture** with a simplified version of **CQRS pattern**.
+
+The workflow: `Controller-> CQRS Exec Command -> Service -> Repository`;
 
 Client and server communicates their commands throght a **websocket**.
 
