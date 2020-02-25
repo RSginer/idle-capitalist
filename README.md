@@ -1,7 +1,7 @@
 # Idle Capitalist
 <span style="display:block;text-align:center">
 
-![alt text](https://i.imgur.com/NWVNAji.gif "Idle Capitalist")
+![alt text](https://raw.githubusercontent.com/RSginer/idle-capitalist/master/screenshot.gif "Idle Capitalist")
 
 </span>
 
