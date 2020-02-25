@@ -4,7 +4,7 @@ function ApiRouter (apiVersion) {
   const ApiEndpoints = require(`./v${apiVersion}`)
   const router = express.Router()
 
-  router.use('/v1', ApiEndpoints())
+  router.use(`/v${apiVersion}`, ApiEndpoints())
 
   return router
 }
