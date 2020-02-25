@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=idle-capitalist-server:* node index.js",
-    "start:dev": "DEBUG=idle-capitalist-server:* nodemon index.js"
+    "start:dev": "standard --fix && DEBUG=idle-capitalist-server:* nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/RSginer/idle-capitalist#readme",
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "standard": "^14.3.1"
   },
   "dependencies": {
     "config": "^3.2.6",

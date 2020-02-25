@@ -1,36 +1,35 @@
-'use strict';
+'use strict'
 
-const debug = require('debug')('idle-capitalist-server:controller');
-const util = require('../../util');
-const clientCommands = require('../../cqrs/types/client');
-const serverCommands = require('../../cqrs/types/server');
-const GameCQRSManager = require('../../cqrs/game');
+const debug = require('debug')('idle-capitalist-server:controller')
+const util = require('../../util')
+const clientCommands = require('../../cqrs/types/client')
+const serverCommands = require('../../cqrs/types/server')
+const GameCQRSManager = require('../../cqrs')
 
+function GameWebsocketController (ws) {
+  const gameCQRSManager = GameCQRSManager(ws)
 
-function GameWebsocketController(ws) {
-  const gameCQRSManager = GameCQRSManager(ws);
-
-  function onMessage(message) {
+  function onMessage (message) {
     try {
-      const parsedMessage = JSON.parse(message);
+      const parsedMessage = JSON.parse(message)
 
       if (Object.values(serverCommands).includes(parsedMessage.command)) {
-        debug(`command: ${parsedMessage.command} payload: ${parsedMessage.payload}`);
-        gameCQRSManager.execCommand(parsedMessage.command, parsedMessage.payload);
+        debug(`command: ${parsedMessage.command} payload: ${parsedMessage.payload}`)
+        gameCQRSManager.execCommand(parsedMessage.command, parsedMessage.payload)
       } else {
         if (!parsedMessage.command) {
-          parsedMessage.command = 'undefined';
+          parsedMessage.command = 'undefined'
         }
-        ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command));
+        ws.send(util.clientCommand(clientCommands.INVALID_COMMAND, parsedMessage.command))
         debug(`Invalid command ${parsedMessage.command} with payload ${parsedMessage.payload}`)
       }
-    } catch(err) {
-      debug(err);
-      this.ws.send(util.clientCommand(clientCommands.SERVER_ERROR, err.stack));
+    } catch (err) {
+      debug(err)
+      this.ws.send(util.clientCommand(clientCommands.SERVER_ERROR, err.stack))
     }
   }
 
-  function close() {
+  function close () {
     gameCQRSManager.execCommand(serverCommands.CONNECTION_CLOSED)
   }
   return {
@@ -39,5 +38,4 @@ function GameWebsocketController(ws) {
   }
 }
 
-
-module.exports = GameWebsocketController;
+module.exports = GameWebsocketController
