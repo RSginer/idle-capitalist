@@ -9,7 +9,6 @@ const cors = require('cors')
 const app = express()
 const config = require('config')
 const setupDB = require('./db')
-const GameWebsocketController = require('./controllers/ws')
 const api = require('./api')
 
 app.use(cors())
@@ -25,6 +24,9 @@ app.use(sessionParser)
 app.use('/api', api(config.get('apiVersion')))
 
 const server = http.createServer(app)
+
+// Websocket
+const GameWebsocketController = require('./controllers/ws')
 const wss = new WebSocket.Server({ clientTracking: false, noServer: true })
 
 server.on('upgrade', function (request, socket, head) {
