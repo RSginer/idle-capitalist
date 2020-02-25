@@ -62,6 +62,6 @@
   "initialGameState": {
     "totalCashAmount": 0,
     "businesses": [],
-    "lastConnectionClosedDateInMs": 0
+    "lastEventDateInMs": 0
   }
 }

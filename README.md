@@ -93,7 +93,7 @@ This Model is used to store the game data.
 Game: {
   totalCashAmount: Number,
   businesses: [Business],
-  lastConnectionClosedDateInMs: Number
+  lastEventDateInMs: Number
 }
 ```
 

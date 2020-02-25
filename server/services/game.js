@@ -21,11 +21,11 @@ function GameService () {
     if (!currentGame) {
       isNewGame = true
       const newGame = config.get('initialGameState')
-      currentGame = await gameRepository.create({ ...newGame, lastConnectionClosedDateInMs: Date.now() })
+      currentGame = await gameRepository.create({ ...newGame, lastEventDateInMs: Date.now() })
     }
 
     if (!isNewGame) {
-      time = Date.now() - currentGame.lastConnectionClosedDateInMs
+      time = Date.now() - currentGame.lastEventDateInMs
       const businessesConfig = config.get('businesses')
       const businesses = await businessRepository.find()
       revenue = 0
@@ -44,7 +44,7 @@ function GameService () {
 
       const totalCashAmount = currentGame.totalCashAmount
 
-      currentGame.lastConnectionClosedDateInMs = Date.now()
+      currentGame.lastEventDateInMs = Date.now()
       currentGame.totalCashAmount = Math.round((totalCashAmount + revenue) * 100) / 100
       await gameRepository.save(currentGame)
     }
@@ -173,7 +173,7 @@ function GameService () {
   // Connection close
   async function updateLastConnectionTime (ms) {
     const currentGame = await gameRepository.findOne()
-    currentGame.lastConnectionClosedDateInMs = ms
+    currentGame.lastEventDateInMs = ms
 
     await gameRepository.save(currentGame)
   }
