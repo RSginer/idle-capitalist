@@ -10,8 +10,7 @@ const app = express()
 const config = require('config')
 const setupDB = require('./db')
 const GameWebsocketController = require('./controllers/ws')
-const GameHttpController = require('./controllers/http')
-const gameHttpController = GameHttpController()
+const api = require('./api')
 
 app.use(cors())
 
@@ -23,7 +22,7 @@ const sessionParser = session({
 
 app.use(sessionParser)
 
-app.post('/initGame', gameHttpController.initGame)
+app.use('/api', api(config.get('apiVersion')))
 
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ clientTracking: false, noServer: true })

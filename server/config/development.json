@@ -5,6 +5,7 @@
     "protocol": "mongodb://",
     "database": "idle-capitalist"
   },
+  "apiVersion": 1,
   "businesses": {
     "lemonade": {
       "title": "Limonade Stand",
