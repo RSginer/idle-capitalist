@@ -108,14 +108,21 @@ Business: {
 ```
 ### Maths
 * Calculating expand business cost.
+
 $cost_{next} = cost_{base} \times (rate_{growth})^{owned}$
+
 $cost_{base} = \text{Initial Cost}$
+
 $rate_{growth} = \text{Coefficient}$
+
 $owned = \text{Business Level}$
 
 * Calculating business revenue per second
+
 $production_{total} = (production_{base} \times owned)$
+
 $owned = \text{Business Level}$
+
 $production_{base} = \text{Initial Productivity}$
 
 * 👨🏻‍💼 Managers price is fixed depends on the business:
