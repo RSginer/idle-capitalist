@@ -68,10 +68,9 @@ npm run start
 * Go to http://localhost:3000 🤘
 
 ## 👨‍💻 Technical things
-This game uses two compatible architecture patterns, a common **onion architecture** with a simplified version of **CQRS pattern**.
 
 Workflow: 
-`Web browser -> React Component -> Dispatch Redux Action -> Redux Saga Catch -> Websocket Emmit -> Server Websocket -> Controller -> CQRS Exec Command -> Service -> Repository -> Database`.
+`Web browser -> React Component -> Dispatch Redux Action -> Redux Saga Catch -> Websocket Emmit -> Server Websocket -> Controller -> RPC Exec Command -> Service -> Repository -> Database`.
 
 Initial game state is fetched from an REST API `GET /api/v1/game/initialGameState`.
 
